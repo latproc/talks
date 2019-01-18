@@ -16,7 +16,7 @@ cat $files \
 			$1 != "" { 
 					if (inaside>0) {printf "</aside>\n"; inaside = 0; }
 					if (inslide==1) printf "</section>\n"; 
-					printf "<section>\n\t<h2>%s</h2>\n",$1; 
+					printf "<section data-background-image=\"css/theme/lca2019-title-bg-transparent.svgi\">\n\t<h2>%s</h2>\n",$1; 
 					inslide=1
 			}
 			$0 != "" && $1 == "" {
