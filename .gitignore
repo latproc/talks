@@ -1,0 +1,14 @@
+.idea/
+*.iml
+*.iws
+*.eml
+server/out/
+.DS_Store
+server/.svn
+server/log/*.log
+server/tmp/**
+server/node_modules/
+server/package-lock.json
+server/.sass-cache
+server/css/reveal.min.css
+server/js/reveal.min.js

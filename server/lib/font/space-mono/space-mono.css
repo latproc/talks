@@ -1,0 +1,13 @@
+/* space-mono-regular - latin */
+@font-face {
+    font-family: 'Space Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: url('space-mono-v3-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Space Mono'), local('SpaceMono-Regular'),
+         url('space-mono-v3-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('space-mono-v3-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('space-mono-v3-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('space-mono-v3-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('space-mono-v3-latin-regular.svg#SpaceMono') format('svg'); /* Legacy iOS */
+}

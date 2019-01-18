@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 261 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g id="Layer1">
+        <g transform="matrix(0.358738,0,0,0.358738,-243.672,-84.2961)">
+            <circle cx="1043.91" cy="285.315" r="7.44" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.358738,0,0,0.358738,-227.465,-48.5259)">
+            <circle cx="1043.91" cy="285.315" r="7.44" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.358738,0,0,0.358738,-259.213,-48.3855)">
+            <circle cx="1043.91" cy="285.315" r="7.44" style="fill:white;"/>
+        </g>
+    </g>
+    <g transform="matrix(1,0,0,1,44.4276,8.67429)">
+        <rect x="0" y="0" width="227.119" height="58.205" style="fill:none;"/>
+        <clipPath id="_clip1">
+            <rect x="0" y="0" width="227.119" height="58.205"/>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M-8,1112L600,1112" style="fill:none;stroke:white;stroke-width:64.04px;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M24,168L24,1080" style="fill:none;stroke:white;stroke-width:64.04px;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M1096,152L1021,159L955,177L898,209L850,253L811,309L783,376L766,454L760,543L760,770L766,860L783,940L811,1007L849,1062L898,1105L955,1136L1021,1154L1096,1160L1136,1158L1209,1145L1271,1119L1303,1099L1096,1099L1034,1093L933,1047L867,959L835,836L831,761L831,551L835,481L847,417L895,311L979,238L1096,213L1303,213L1299,210L1242,179L1174,159L1136,154L1096,152ZM1431,825L1361,825L1360,850L1357,874L1337,945L1299,1011L1240,1062L1161,1093L1096,1099L1303,1099L1365,1037L1409,953L1425,891L1430,859L1431,825ZM1303,213L1096,213L1129,215L1160,219L1239,250L1297,301L1336,367L1356,439L1361,487L1431,487L1425,421L1409,360L1383,301L1324,229L1303,213Z" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M2192,296L2183,307L2174,316L2164,325L2152,332L2477,1064L2536,1064L2192,296Z" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M2194,296L2152,335L2475,1064L2536,1064L2535,1060L2477,1060L2157,336L2167,329L2177,321L2185,313L2193,303L2197,303L2194,296ZM2197,303L2193,303L2531,1060L2535,1060L2197,303Z" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M1745,943L1696,943L1708,944L1720,946L1731,948L1741,952L1745,943ZM2029,200L1688,944L1691,944L1694,943L1745,943L2072,225L2029,200Z" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M1728,959L1699,959L1711,960L1722,961L1734,964L1745,968L1747,968L1749,964L1745,964L1733,960L1728,959ZM2050,205L2043,205L2084,228L1745,964L1749,964L2088,227L2050,205ZM2041,200L1690,958L1688,960L1693,960L1698,959L1728,959L1722,958L1711,956L1709,956L1694,956L2043,205L2050,205L2041,200ZM1699,956L1697,956L1694,956L1709,956L1699,956Z" style="fill:white;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M1712,1136L2368,1136" style="fill:none;stroke:white;stroke-width:48.03px;"/>
+            </g>
+            <g transform="matrix(0.0413847,0,0,0.0413386,0,0)">
+                <path d="M2360,1096L1704,1096L1704,1144L2376,1144L2375,1141L2374,1141L1708,1141L1708,1100L2360,1100L2360,1098L2360,1096ZM2360,1100L2357,1100L2359,1110L2362,1121L2365,1131L2370,1141L2374,1141L2369,1131L2365,1120L2362,1109L2360,1100Z" style="fill:white;"/>
+            </g>
+        </g>
+        <rect x="0" y="0" width="260.889" height="58.205" style="fill:none;"/>
+        <g transform="matrix(0.662156,0,0,0.661417,123.817,16.2896)">
+            <text x="0px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">L</text>
+            <text x="8.008px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">I</text>
+            <text x="14.007px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">N</text>
+            <text x="25.998px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">U</text>
+            <text x="37.99px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">X</text>
+            <text x="47.991px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">.</text>
+            <text x="52.647px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">C</text>
+            <text x="62.484px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">O</text>
+            <text x="75.486px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">N</text>
+            <text x="87.476px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">F</text>
+            <text x="91.695px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">.</text>
+            <text x="96.814px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">A</text>
+            <text x="107.51px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">U</text>
+        </g>
+        <g transform="matrix(0.662156,0,0,0.661417,123.817,30.8408)">
+            <text x="0px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">2<tspan x="9.997px " y="0px ">1</tspan></text>
+        </g>
+        <g transform="matrix(0.662156,0,0,0.661417,137.06,30.8408)">
+            <text x="0px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">-</text>
+        </g>
+        <g transform="matrix(0.662156,0,0,0.661417,141.033,30.8408)">
+            <text x="0px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">2</text>
+            <text x="9.997px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">5</text>
+            <text x="22.995px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">J</text>
+            <text x="28.992px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">a</text>
+            <text x="37.992px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">nu</text>
+            <text x="58.007px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">a</text>
+            <text x="67.007px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">r</text>
+            <text x="74.093px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">y</text>
+        </g>
+        <g transform="matrix(0.662156,0,0,0.661417,197.316,30.8408)">
+            <text x="0px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">2<tspan x="9.997px 19.994px " y="0px 0px ">01</tspan></text>
+            <text x="29.991px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">9</text>
+        </g>
+        <g transform="matrix(0.662156,0,0,0.661417,123.817,46.7148)">
+            <text x="0px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">C</text>
+            <text x="10.004px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">h</text>
+            <text x="20.011px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">r</text>
+            <text x="27.004px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">i</text>
+            <text x="30.995px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">s</text>
+            <text x="38.783px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">t</text>
+            <text x="44.551px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">c</text>
+            <text x="52.548px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">hu</text>
+            <text x="72.563px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">r</text>
+            <text x="79.277px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">c</text>
+            <text x="87.275px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">h</text>
+            <text x="97.282px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">,</text>
+        </g>
+        <g transform="matrix(0.662156,0,0,0.661417,194.005,46.7148)">
+            <text x="0px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">N</text>
+            <text x="11.991px" y="0px" style="font-family:'Calibri', sans-serif;font-size:19px;fill:white;">Z</text>
+        </g>
+    </g>
+</svg>
