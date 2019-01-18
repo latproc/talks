@@ -1,0 +1,7 @@
+latproc
+	Library And Tools for Process Control
+	First published 2012
+	-- The design is based on what we have learnt
+	-- programming using state machines and PLCs over many years
+	BeckHoff EtherCAT(tm) based control
+	Linux hosted

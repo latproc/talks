@@ -1,0 +1,7 @@
+Clockwork
+	The latproc language
+	Objects are called 'Machine's
+	Describe Machines by their states
+	States are selected by evaluating rules
+	All Machines run continuously in parallel
+	Machines monitor each other

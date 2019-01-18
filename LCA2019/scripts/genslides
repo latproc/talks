@@ -1,0 +1,40 @@
+#!/bin/sh
+
+SLIDEDIR=slides
+
+if [ $1 == "-f" ]; then
+  shift
+  files=`cat $1`
+else
+  files=$1
+fi
+cd $SLIDEDIR || exit 2
+cat $files \
+	| tr '\t' '|' \
+	| awk -F\| '
+      BEGIN { printf "<div class=\"slides\">\n"; inslide = 0 }
+			$1 != "" { 
+					if (inaside>0) {printf "</aside>\n"; inaside = 0; }
+					if (inslide==1) printf "</section>\n"; 
+					printf "<section>\n\t<h2>%s</h2>\n",$1; 
+					inslide=1
+			}
+			$0 != "" && $1 == "" {
+			    if (substr($2,0,2) != "--") {
+						if (inaside > 0) {
+							printf("</aside>\n")
+							inaside = 0;
+						}
+						printf "\t<p>\n\t%s\n\t</p>\n",$2; 
+					} else {
+						if (inaside > 0 && inaside < NR-1) {
+							printf("</aside>\n")
+							inaside = 0;
+						}
+						if (inaside==0) printf "\t<aside class=\"notes\">\n"
+						printf "\t\t%s\n",substr($2,3,10000); 
+						inaside=NR
+					}
+			}
+			END {printf("</section>\n</div>\n")}
+    '

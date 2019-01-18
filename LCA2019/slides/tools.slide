@@ -1,0 +1,12 @@
+Tools
+	iod - main EtherCAT control daemon
+	cw - local interpreter daemon
+	iosh - terminal shell
+	sampler - monitoring and logging
+	web UI - basic web ui for monitoring and control
+	persistd - monitor and retain persistend state
+	modbusd - bridge to modbus masters (panels)
+	device connector - bridge to TCP/IP or serial devices
+	humid - GUI development tool
+	web 3D visualisation - render a model in 3D
+	scope - character based graphing for sampler 
