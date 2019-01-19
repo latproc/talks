@@ -1,7 +1,71 @@
-latproc
-	Library And Tools for Process Control
+latproc (Language And Tools for Process Control)
+	-- TODO add image of bales on gravity feed from Ron spec docuement
 	First published 2012
+	-- latproc project is used for process control of hydraulic and pyneumatic machinery.
+	-- Developed intitally for Wooltech Wool Sampling machines
+	Linux hosted
+	Open Source under BSD and GPL
+	Developed a languaged which we call Clockwork
+	-- which we will talk about later
+
+Capabilties
+	BeckHoff EtherCAT(tm) based control
+	-- Current able to interface to Ethercat Industrial Hardware
+	-- Very high speed updated rates
+	Humid
+	-- Human Interface Device
+	Protocols
+	-- Number of protcols both indusralia in nature and custom using tcp/ip and plugins
+		Modbus master/slave
+		Raw TCP/IP and serial UART (device_connector)
+		Plugins
+			libcurl
+			exec system
+		MQTT
+	-- Why would we do this, lets go back
+
+Going Back
+	Wooltech has 40 years of develop machines which needed control
+	Earliest was a electrical time and relay logic
+	Scorpian board John langford and lots of extra boards
+	Early PLCs by Koyo (rebadged by GE and others)
+	Custom Zilog Z80 board with inputs and relayies
+	-- Used by Wooltech upto about 1995 with a second series developed 
+	Back to Koyo PLC's during the 2000s using newer models
+
+Issues we Experienced or Why would we do this
+	Long Term Hardware support is hard
+
+	Closed binary file formats for hardware programming
+	Industrial hardware is upgraded with for only compaltible file formats
+  External expertise often required
+		Initially in building controller boards
+		Later in writing control software
+	Hard to find industrially  experienced coders
+  -- Hard to maintain a relationship with external people without  large amount of ongoing work
+  -- We do not like to depend on external people for our core business, especially where support and
+  -- onging maintenance activities are needed.
+
+What did we Do
+	Moved to a linux based solution
+	Programmed a solution with custom messaging and communications
+
+ 
+
+	-- This creates a version control nightmare of 10 installed system each using different hardware / software tools and trying to maintain a single code base is impoissalbe.
+
+	-- Wooltech found the control develop risks for new/refusbished sampling lines became so prohibitive that we considered moving to other industries.
 	-- The design is based on what we have learnt
 	-- programming using state machines and PLCs over many years
-	BeckHoff EtherCAT(tm) based control
-	Linux hosted
+	-- and the business experance before that using a Zilog Z80 platform with custom BIOS and compiler
+
+Debugging
+	Effective debugging tools
+		State Description
+		Predicate exmplaiotn
+		contiunes sampling of the state and propties changes.
+	-- Clockworks tools for debugging are highly effective and are bases round current state description along with explantion 
+
+
+
+
