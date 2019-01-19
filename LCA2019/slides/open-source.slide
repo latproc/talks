@@ -1,7 +1,8 @@
-Open Source
+Open Source components
 	Linux, GNU compiler suite
-	cJSON
-	libmodbus
-	ZeroMQ
-	EtherLAB
+	cJSON, libmodbus, ZeroMQ
+	EtherLAB, libXML, three.js
+	nanogui, glfw
 	etc.,
+
+	-- these are some of the Open Source tools we use within the latproc toolset

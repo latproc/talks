@@ -1,0 +1,29 @@
+Title: Clockwork: Controlling things with rules
+
+Target audience: Developer, Modeller
+
+Abstract:
+Clockwork is a language to describe how machines should behave. It was developed 
+specifically to reduce the risk and cost of custom programming of short-run 
+machines without loss of flexibility. Over several decades we have built custom 
+machines and have built control systems using a variety of technologies, 
+including: Z80 controller boards, C++ control software under Linux and avariety of PLCs. 
+These technologies have had their strengths and weaknesses but overall we have found that 
+Clockwork and its associated tools has far greater reusability and lower per-machine 
+development overhead than anything else we have tried. The language itself is not 
+like other programming languages and this talk is about how we program in Clockwork.
+
+Private Abstract:
+Clockwork has been designed and built specifically to meet the needs of the machines 
+that we build and its features have been incrementally extended and improved each time 
+a new machine is developed. There are several issues and some design gaps and weaknesses 
+that we are working on as time permits. The main features we want to discuss are:
+
+* defining states using rules rather than transitions
+* programming without loops and 'if' statements
+* reusing components as black boxes
+* controlling multiple things at once using lists and selectors
+
+Special Requirements:
+
+Project Name: Clockwork
