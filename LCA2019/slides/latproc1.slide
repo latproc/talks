@@ -45,11 +45,11 @@ Issues we Experienced or Why would we do this
 	Long Term Hardware support is hard
 
 	Closed binary file formats for hardware programming
-	Industrial hardware is upgraded with for only compaltible file formats
+	Industrial hardware is upgraded with forward only compaltible file formats.
 	External expertise often required
 		Initially in building controller boards
 		Later in writing control software
-	Hard to find industrially  experienced coders
+	Hard to find industrially experienced coders
 	-- The machines that Wooltech build tend to be in service for 20 years or so
 	-- before they receive any major servicing or refurbishment. Over that period
 	-- Lots of things change with the components that make up the machinery
@@ -60,7 +60,7 @@ Issues we Experienced or Why would we do this
 	-- onging maintenance activities are needed.
 
 What did we Do?
-	Moved to a linux based solution
+	Moved to a Linux based solution
 	Programmed a solution with custom messaging and communications
 	Programming took too long
 	Result was not really what we wanted
@@ -69,7 +69,7 @@ What did we Do?
 	We went back to PLCs
 
 	-- At first when we moved towards uing a Linux-based control
-	-- system we had som software developed in C++ along with a custom
+	-- system we had some software developed in C++ along with a custom
 	-- messaging system between components.
 	-- Overall, software produced met the performace requirements
 	-- but we really needed more of a reusable softer driver
