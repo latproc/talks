@@ -6,35 +6,68 @@ if [ $1 == "-f" ]; then
   shift
   files=`cat $1`
 else
-  files=$1
+  files=$*
 fi
-cd $SLIDEDIR || exit 2
+if [ -d $SLIDEDIR ]; then
+	cd $SLIDEDIR || exit 2
+fi
 cat $files \
-	| tr '\t' '|' \
-	| awk -F\| '
+	| tr '\t' '`' \
+	| awk -F\` '
       BEGIN { printf "<div class=\"slides\">\n"; inslide = 0 }
-			$1 != "" { 
-					if (inaside>0) {printf "</aside>\n"; inaside = 0; }
-					if (inslide==1) printf "</section>\n"; 
-					printf "<section data-background-image=\"css/theme/lca2019-title-bg-transparent.svgi\">\n\t<h2>%s</h2>\n",$1; 
+			$1 != "" && incode == 0 { 
+					if (inlist==1) {inlist = 0; printf "\t</ul>\n" }
+					if (inaside>0) {printf "\t</aside>\n"; inaside = 0; }
+					if (inslide==1) printf "</section>\n";
+					slidenum = slidenum+1
+					if (slidenum == 1) { 
+						printf "<section style=\"text-align: left;\" data-background-image=\"css/theme/lca2019-title-bg-transparent.svg\">\n\t<h2>%s</h2>\n",$1; 
+					}
+					else {
+						printf "<section style=\"text-align: left; zoom:80%\" \">\n\t<h2>%s</h2>\n",$1; 
+					}
 					inslide=1
 			}
-			$0 != "" && $1 == "" {
-			    if (substr($2,0,2) != "--") {
-						if (inaside > 0) {
-							printf("</aside>\n")
-							inaside = 0;
-						}
-						printf "\t<p>\n\t%s\n\t</p>\n",$2; 
-					} else {
-						if (inaside > 0 && inaside < NR-1) {
-							printf("</aside>\n")
-							inaside = 0;
-						}
-						if (inaside==0) printf "\t<aside class=\"notes\">\n"
-						printf "\t\t%s\n",substr($2,3,10000); 
-						inaside=NR
+			$0 == "" && incode == 0 { 
+					if (inaside > 0) {
+							printf("<br/>\n")
+					} else { 
+						print
 					}
 			}
+			$0 != "" && $1 == "" && incode == 0 {
+			    if (substr($2,0,2) != "--" && $2 != "###") {
+					if (inaside > 0) {
+						printf("</aside>\n")
+						inaside = 0;
+					}
+					if ($2=="") {
+						if (inlist == 0) {
+							inlist = 1
+							printf "\t<ul>\n\t<li>%s</li>\n\t\n",$0; 
+						} else {
+							printf "\t<li>%s</li>\n\t\n",$0; 
+						}
+					}
+					else {
+						if (inlist==1) {inlist = 0; printf "\t</ul>\n" }
+						printf "\t<p>\n\t%s\n\t</p>\n",$2; 
+					}
+				} else if ($2 == "###") {
+					if (inlist==1) {inlist = 0; printf "\t</ul>\n" }
+					incode = 1; 
+					printf("<pre><code>");
+					$2 = ""
+				} else {
+					if (inaside==0) printf "\t<aside class=\"notes\">\n"
+					printf "\t\t%s\n",substr($2,3,10000); 
+					inaside=NR
+				}
+			}
+			incode == 1 {
+					if ($1 == "" && $2 == "###") { incode = 0; printf("</code></pre>\n"); }
+					else { print substr($0,2,length($0)) }
+			}
 			END {printf("</section>\n</div>\n")}
-    '
+    ' \
+	| tr '`' '\t'

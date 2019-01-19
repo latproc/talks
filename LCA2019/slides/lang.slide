@@ -1,0 +1,225 @@
+Clockwork Language
+	Rule based
+	Automatic state selection
+	No Loop statements
+	Highly reusable code
+
+Defining states
+	###
+	Light MACHINE {
+		on STATE;
+		off INITIAL;
+	}
+	###
+	Simple machine
+	No automation
+	Controlled externally
+
+	-- this describes a machine that can be on or off, initially it is 
+	-- off. This machine does not have any automation, it has to be
+	-- controlled externally by directly setting its state.
+
+Using transitions
+
+	###
+	ToggleSwitch MACHINE {
+		on STATE;
+		off INITIAL;
+
+		TRANSITION on TO off USING next;
+		TRANSITION off TO on USING next;
+	}
+	###
+	Basic automation via transitions
+	Flips state when 'next' message is received
+
+	-- this dscribes a machine that can receive a message called: 'next'
+
+	-- if this machine receives the message, when it is on, it turns off.
+	-- Similarly, if it was off when the message arrives, it turns on.
+
+	-- repeatedly sending the next message will cause the machine to
+	-- toggle between on and off
+
+Situation Normal
+	MACHINEs can have STATEs
+	TRANSITIONS can cause STATEs to change
+	Nothing special so far...
+
+	-- this is all very common and is what all state-based programming
+	-- is like. Essentially, transitions are used to respond to 
+	-- events and programming using state machines is all about 
+	-- sending and responding to events.
+
+	-- Clockwork is not like this and actually we rarely use the
+	-- TRANSITION statement.
+
+Using rules
+
+	###
+	Blinker MACHINE {
+		on WHEN SELF IS off;
+		off DEFAULT;
+	}
+	###
+	Automatic state selection
+	Evaluates rules in sequence
+	Stops at the first rule that is true
+
+	-- here is a machine that has two states, 'on' and 'off'
+
+	-- the 'on' state has a rule given by the WHEN clause
+
+	-- the machine continuously evaluates its rules and none of them
+	-- match (that is, if none of them evaluate as 'TRUE') then
+	-- the machine sets itself into the DEFAULT state.
+
+	-- Looking at the rule on this machine, we see that whenever
+	-- the machine is 'off', the rule for the 'on' state is TRUE
+	-- so the machine turns on. 
+
+	-- If the machine is on, the rule 'SELF IS off' is no longer true so
+	-- the machine cannot stay in the 'on' state. Since there are
+	-- no other states, the machine goes to 'off'
+
+Controlling things
+
+	###
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
+
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+	###
+	Controls 'light' based on the state of 'switch'
+
+	-- When a machine changes state, it check to see if it has to do anything
+	-- by looking for an ENTER statement for the new state. 
+
+	-- In this example, we are controlling a light using about
+	-- switch.
+
+	-- When the switch is turned on, this controller turns the light on.
+
+	-- In clockwork, the switch and the light could be other software 'MACHINE's or
+	-- they could represent hardware devices, such as switches, beams or proximity sensors
+	-- They might even represent the value of a topic in an IoT device.
+
+No Loops or Ifs?
+
+	###
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN count < 10;
+		idle DEFAULT;
+
+		ENTER up { count := count + 1; }
+	}
+	###
+
+	-- There is no while statement, for statement or repeat statement in clockwork
+	-- everything is accomplished with state changes.
+
+	-- In this example, we show a machine that counts up to 10 without a loops
+
+	-- Actually this example has a bug. When the machine starts its count property is set to zero.
+	-- The rules are checked and 'count < 10' is true so the machine enters the 'up' state
+
+	-- When the machine enters the up state, it adds one to count.
+
+	-- Next time the rules are evaluated, count is still < 10 to the machine stays
+	-- in the 'up' state.
+
+	-- Since it has already entered the 'up' state, the machine does not execute the
+	-- ENTER function for 'up' so the machine is stable and sits in the 'up' 
+	-- state forever.
+
+
+No If statements?
+
+	###
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN count < 10;
+		idle DEFAULT;
+
+		ENTER up { 
+			count := count + 1;
+			IF count < 10 { SET SELF TO idle; }
+		}
+	}
+	###
+
+	An ugly fix to the error in the rules
+
+	-- actually, clockwork has if statements but we almost never use them
+
+	-- this example fixes the previous bug using an IF statement.
+
+	-- usually if we think we need to use an if statement, we haven'that
+	-- got the rules right.
+
+Counting up
+
+	###
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN SELF IS idle AND count < 10;
+		idle DEFAULT;
+
+		ENTER up { count := count + 1; }
+	}
+	###
+
+	-- this example fixes the bug in the previous example.
+
+	-- note that it is a lot cleaner and doesn't need an if statement
+
+Reusing components
+
+	###
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
+
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+	###
+
+	-- When machine are linked together, it is important to make
+	-- sure that they have the states and properties that are used in 
+	-- all of the rules and ENTER functions
+
+	-- for example, the machine passed to the LightSwitch must have a state 
+	-- called 'on' so it can be test in the rules.
+
+	-- similarly, the machine connected as 'light' must have an 'on' state and an 'off' state
+	-- It may have other states of its own also but LightSwitch doesn't care about that.
+
+	-- It turns out that this simple way of connecting machines to each other this
+	-- way means a component (such as this LightSwitch) can be placed in a 
+	-- library and reused
+
+
+Controlling multiple things at once
+
+	###
+	LightController MACHINE lights {
+		COMMAND on  { SEND turnOn TO lights; }
+		COMMAND off { SEND turnOff TO lights; }
+	}
+	front_porch Light;
+	garden Light;
+	yard_lights LIST front_porch, garden;
+
+	controller LightController yard_lights;
+	###
+
+	-- this example shows how some lights can be built into a list and
+	-- that list can be connected to a controller machine
+
+	-- when a message is sent to a LIST, the message is actually
+	-- sent to all of the devices built into the LIST
