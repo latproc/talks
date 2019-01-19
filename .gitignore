@@ -2,6 +2,7 @@
 *.iml
 *.iws
 *.eml
+*.bak
 server/out/
 .DS_Store
 server/.svn

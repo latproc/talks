@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+#  insert a file between markers in another file
+
+START_MARK='*** include user data between here... ***'
+END_MARK='*** ... and here ***'
+
+
+if [ ! -r "$1" ]; then
+  echo usage: `basename $0` master-file [ snippet-file ]
+  exit 2
+fi 
+
+master="$1"
+snippet=$2
+
+cp "$master" "$master".bak
+
+cat "$master" | awk -v marker="$START_MARK" '
+	seen != 1 {print}
+  $0 ~ marker {seen = 1}
+' > "$master".new
+
+cat $snippet >> "$master".new
+
+cat "$master" | awk -v marker="$END_MARK" '
+  $0 ~ marker {seen = 1}
+	seen >= 1{print}
+' >> "$master".new
+
+mv "$master".new "$master"
