@@ -1,21 +1,21 @@
 latproc (Language And Tools for Process Control)
-	-- TODO add image of bales on gravity feed from Ron spec docuement
+	-- TODO add image of bales on gravity feed from Ron spec document
 	First published 2012
-	-- latproc project is used for process control of hydraulic and pyneumatic machinery.
-	-- Developed intitally for Wooltech Wool Sampling machines
+	-- latproc project is used for process control of hydraulic and pneumatic machinery.
+	-- Developed initially for Wooltech Wool Sampling machines
 	Linux hosted
 	Open Source under BSD and GPL
-	Developed a languaged which we call Clockwork
+	Developed a language which we call Clockwork
 	-- which we will talk about later
 
-Capabilties
+Capabilities
 	BeckHoff EtherCAT(tm) based control
 	-- Current able to interface to Ethercat Industrial Hardware
 	-- Very high speed updated rates
 	Humid
 	-- Human Interface Device
 	Protocols
-	-- Number of protcols both indusralia in nature and custom using tcp/ip and plugins
+	-- Number of protocols both industrial in nature and custom using TCP/IP and plugins
 		Modbus master/slave
 		Raw TCP/IP and serial UART (device_connector)
 		Plugins
@@ -27,25 +27,25 @@ Capabilties
 Going Back
 	Wooltech - 40 years of automation
 	Electrical time and relay logic
-	Scorpion board John langford and lots of extra boards
+	Scorpion board John Langford and lots of extra boards
 	Custom Zilog Z80 board with inputs and relays
 	Early PLCs by Koyo (rebadged by GE and others)
-	Custom software ron Linux (late 90s) 
-	Back to Koyo PLC's during the 2000s using newer models
+	Custom software on Linux (late 90s) 
+	Back to Koyo PLCs during the 2000s using newer models
 
 	-- Wooltech has 40 years of develop machines that needed control
 	-- From electrical time and relay logic, to a Scorpion board
 	-- and then a Zilog Z80-based board with inputs and relays
 	-- that was programmed with a macro-assembler. 
 	-- Early Koyo based PLCs were used by Wooltech up to about 1995 with a second series developed 
-	-- After trying a linux based C++ system we built a few more 
+	-- After trying a Linux based C++ system we built a few more 
 	-- machines using newer models of the Koyo PLCs
 
 Issues we Experienced
 	Long Term Hardware support is hard
 
 	Closed binary file formats for hardware programming
-	Industrial hardware is upgraded with forward only compaltible file formats.
+	Industrial hardware is upgraded with forward only compatible file formats.
 	External expertise often required
 		Initially in building controller boards
 		Later in writing control software
@@ -57,7 +57,7 @@ Issues we Experienced
 	-- hard to maintain a relationship with external people for software maintenance
 	-- without large amount of ongoing work.
 	-- We do not like to have to depend on external people for our core business, especially where support and
-	-- onging maintenance activities are needed.
+	-- ongoing maintenance activities are needed.
 
 What did we Do?
 	Moved to a Linux based solution
@@ -68,10 +68,10 @@ What did we Do?
 	We discovered state machines
 	We went back to PLCs
 
-	-- At first when we moved towards uing a Linux-based control
+	-- At first when we moved towards using a Linux-based control
 	-- system we had some software developed in C++ along with a custom
 	-- messaging system between components.
-	-- Overall, software produced met the performace requirements
+	-- Overall, software produced met the performance requirements
 	-- but we really needed more of a reusable softer driver
 	-- rather than a monolithic application.
 
@@ -81,10 +81,11 @@ Our Requirements
 	Retain Control
 	Reduce Risk
 	Be Future-proof
-	Resuse Don't Rewrite
+	Reuse Don't Rewrite
 	Version Control all source code
 
-	-- Wooltech found the control develop risks for new/refusbished sampling lines became 
+	-- Wooltech found the control development risks for 
+	-- new/refurbished sampling lines became 
 	-- so prohibitive that we considered moving to other industries.
 
 	-- As part of another project a past colleague, Martin Leadbeater, provided some help 
@@ -106,13 +107,13 @@ Retaining Control
 
 	-- The design is based on what we have learnt
 	-- programming using state machines and PLCs over many years
-	-- and the business experance before that using a Zilog Z80 platform with custom BIOS and compiler
+	-- and the business experience before that using a Zilog Z80 platform with custom BIOS and compiler
 
 	-- We have found Clockwork a very effective language to model and control 
 	-- machinery. We can write the code for our machines ourselves without
-	-- needing to engage ourside help even when the processing logic is complex.
+	-- needing to engage outside help even when the processing logic is complex.
 
-	-- When writing the code, we think of the bahaviour of individual parts of the equipment
+	-- When writing the code, we think of the behaviour of individual parts of the equipment
 	-- We write clockwork code that represents our understanding of the machine
 	-- behaviour. For example, if a device on the machine can be 'up' or 'down' we
 	-- define a MACHINE in clockwork that has an 'UP' state and a 'DOWN' state.
@@ -126,12 +127,12 @@ Retaining Control
 Reducing Risk
 	By programming ourselves
 	By simulating as we develop
-	By resuing what we have done before
+	By reusing what we have done before
 
 	-- We understand our machinery better than other people and we
 	-- understand the most effective way it should be used. 
 	-- By programming the control ourselves we can be sure that
-	-- the machine will be useable and we can control the 
+	-- the machine will be usable and we can control the 
 	-- development process.
 
 	-- Clockwork makes it fairly simple to simulate components
@@ -154,18 +155,18 @@ Version Control everything
 	Over time PLC software or HMI panel firmware changes
 	Proprietary, windows-based programming tools do not maintain support for all versions 
 
-	-- Building machinery over an extended period of time leads to situatons where
+	-- Building machinery over an extended period of time leads to situations where
 	-- some sites have one version of a PLC programming tool and others have a different version
 	-- This creates a version control nightmare of 10 installed system each using different 
-	-- hardware / software tools and trying to maintain a single code base is impoissalbe.
+	-- hardware / software tools and trying to maintain a single code base is impossible.
 
 
 Debugging
 	Effective debugging tools
 		State Description
-		Predicate exmplaiotn
-		contiunes sampling of the state and propties changes.
-	-- Clockworks tools for debugging are highly effective and are bases round current state description along with explantion 
+		Predicate explanation
+		continues sampling of the state and properties changes.
+	-- Clockworks tools for debugging are highly effective and are bases round current state description along with explanation 
 
 
 

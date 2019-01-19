@@ -8,7 +8,7 @@ Tools
 	device connector - bridge to TCP/IP or serial devices
 
 User Interface Tools 
-	web UI - basic web ui for monitoring and control
+	Web UI - basic web applicationfor monitoring and control
 	humid - GUI development tool
 	web 3D visualisation - render a model in 3D
 	scope - character based graphing for sampler 
