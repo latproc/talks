@@ -25,36 +25,114 @@ Capabilties
 	-- Why would we do this, lets go back
 
 Going Back
-	Wooltech has 40 years of develop machines which needed control
-	Earliest was a electrical time and relay logic
-	Scorpian board John langford and lots of extra boards
+	Wooltech - 40 years of automation
+	Electrical time and relay logic
+	Scorpion board John langford and lots of extra boards
+	Custom Zilog Z80 board with inputs and relays
 	Early PLCs by Koyo (rebadged by GE and others)
-	Custom Zilog Z80 board with inputs and relayies
-	-- Used by Wooltech upto about 1995 with a second series developed 
+	Custom software ron Linux (late 90s) 
 	Back to Koyo PLC's during the 2000s using newer models
+
+	-- Wooltech has 40 years of develop machines that needed control
+	-- From electrical time and relay logic, to a Scorpion board
+	-- and then a Zilog Z80-based board with inputs and relays
+	-- that was programmed with a macro-assembler. 
+	-- Early Koyo based PLCs were used by Wooltech up to about 1995 with a second series developed 
+	-- After trying a linux based C++ system we built a few more 
+	-- machines using newer models of the Koyo PLCs
 
 Issues we Experienced or Why would we do this
 	Long Term Hardware support is hard
 
 	Closed binary file formats for hardware programming
 	Industrial hardware is upgraded with for only compaltible file formats
-  External expertise often required
+	External expertise often required
 		Initially in building controller boards
 		Later in writing control software
 	Hard to find industrially  experienced coders
-  -- Hard to maintain a relationship with external people without  large amount of ongoing work
-  -- We do not like to depend on external people for our core business, especially where support and
-  -- onging maintenance activities are needed.
+	-- The machines that Wooltech build tend to be in service for 20 years or so
+	-- before they receive any major servicing or refurbishment. Over that period
+	-- Lots of things change with the components that make up the machinery
+	-- Even from a programming point of view, it is 
+	-- hard to maintain a relationship with external people for software maintenance
+	-- without large amount of ongoing work.
+	-- We do not like to have to depend on external people for our core business, especially where support and
+	-- onging maintenance activities are needed.
 
-What did we Do
+What did we Do?
 	Moved to a linux based solution
 	Programmed a solution with custom messaging and communications
+	Programming took too long
+	Result was not really what we wanted
+	Program was not very reusable
+	We discovered state machines
+	We went back to PLCs
 
- 
+	-- At first when we moved towards uing a Linux-based control
+	-- system we had som software developed in C++ along with a custom
+	-- messaging system between components.
+	-- Overall, software produced met the performace requirements
+	-- but we really needed more of a reusable softer driver
+	-- rather than a monolithic application.
+
+	-- A good thing that came out of the process was that we learnt about state machines
+
+Our Requirements
+	-- Wooltech found the control develop risks for new/refusbished sampling lines became 
+	-- so prohibitive that we considered moving to other industries.
+	
+	Retain Control
+	Reduce Risk
+	Be Future-proof
+	Resuse Don't Rewrite
+	Version Control all source code
+
+	-- As part of another project a past colleague, Martin Leadbeater, provided some help 
+	-- with building system health monitoring software within some embedded Linux boxes
+	-- I was building. His approach was to use a Domain Specific Language in an attempt
+	-- to make it easy to write scripts that monitor the state of various subsystems
+	-- within the Linux hosts. 
+	
+	-- Together we discussed whether a similar approach might work for the control of
+	-- a new machine that Wooltech was being asked to build.
+	-- After some initial exploration, Martin's design for a Domain Specific Language
+	-- started to take shape and clockwork was born.
+
+Retaining Control
+	Programs pieces are called MACHINEs
+	Machines can be simulated easily
+	Machine stated resemble physical states and behaviour
+
+	-- We have found Clockwork a very effective language to model and control 
+	-- machinery. We can write the code for our machines ourselves without
+	-- needing to engage ourside help even when the processing logic is complex.
+
+	-- When writing the code, we think of the bahaviour of individual parts of the equipment
+	-- We write clockwork code that represents our understanding of the machine
+	-- behaviour. For example, if a device on the machine can be 'up' or 'down' we
+	-- define a MACHINE in clockwork that has an 'UP' state and a 'DOWN' state.
+	-- If we want to model movement or we want to control the device, we 
+	-- might also add states like 'Moving Up' or 'Moving Down'
+	-- We find this direct relationship between the software and the hardware
+	-- to be have advantages in coding and also in talking about the 
+	-- program and how the machine should behave even with team members that 
+	-- are not programmers.
+
+Reducing Risk
+
+
+Future-proofing
+	Use Linux
+	
+
+Resuse Don't Rewrite
+
+
+Version Control all source code
+
 
 	-- This creates a version control nightmare of 10 installed system each using different hardware / software tools and trying to maintain a single code base is impoissalbe.
 
-	-- Wooltech found the control develop risks for new/refusbished sampling lines became so prohibitive that we considered moving to other industries.
 	-- The design is based on what we have learnt
 	-- programming using state machines and PLCs over many years
 	-- and the business experance before that using a Zilog Z80 platform with custom BIOS and compiler
