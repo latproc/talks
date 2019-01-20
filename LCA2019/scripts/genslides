@@ -2,7 +2,7 @@
 
 SLIDEDIR=slides
 
-if [ $1 == "-f" ]; then
+if [ $1 = "-f" ]; then
   shift
   files=`cat $1`
 else
@@ -11,20 +11,21 @@ fi
 if [ -d $SLIDEDIR ]; then
 	cd $SLIDEDIR || exit 2
 fi
+#      {printf "incode: %d, inaside: %d inslide: %d\n", incode, inaside, inslide}
 cat $files \
 	| tr '\t' '`' \
 	| awk -F\` '
-      BEGIN { printf "<div class=\"slides\">\n"; inslide = 0 }
+      BEGIN { printf "<div class=\"slides\">\n"; inslide = 0; incode = 0; inaside = 0; }
 			$1 != "" && incode == 0 { 
 					if (inlist==1) {inlist = 0; printf "\t</ul>\n" }
 					if (inaside>0) {printf "\t</aside>\n"; inaside = 0; }
 					if (inslide==1) printf "</section>\n";
 					slidenum = slidenum+1
 					if (slidenum == 1) { 
-						printf "<section style=\"text-align: left;\" data-background-image=\"css/theme/lca2019-title-bg-transparent.svg\">\n\t<h2>%s</h2>\n",$1; 
+						printf("<section style=\"text-align: left;\" data-background-image=\"css/theme/lca2019-title-bg-transparent.svg\">\n\t<h2>%s</h2>\n",$1); 
 					}
 					else {
-						printf "<section style=\"text-align: left; zoom:80%\" \">\n\t<h2>%s</h2>\n",$1; 
+						printf "<section style=\"text-align: left; zoom:80%%\" \">\n\t<h2>%s</h2>\n",$1; 
 					}
 					inslide=1
 			}
@@ -36,7 +37,7 @@ cat $files \
 					}
 			}
 			$0 != "" && $1 == "" && incode == 0 {
-			    if (substr($2,0,2) != "--" && $2 != "###") {
+			    if (substr($2,1,2) != "--" && $2 != "###") {
 					if (inaside > 0) {
 						printf("</aside>\n")
 						inaside = 0;

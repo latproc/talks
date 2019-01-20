@@ -2,8 +2,8 @@
 #
 #  insert a file between markers in another file
 
-START_MARK='*** include user data between here... ***'
-END_MARK='*** ... and here ***'
+START_MARK=' include user data between here... '
+END_MARK=' ... and here '
 
 
 if [ ! -r "$1" ]; then
