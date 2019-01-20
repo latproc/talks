@@ -328,34 +328,18 @@
 	A Machines state resemble physical states and behaviour
 	</p>
 
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>        ###</h2>
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>        LightSwitch MACHINE switch, light {</h2>
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>                on WHEN switch IS on;</h2>
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>                off DEFAULT;</h2>
+<pre><code>
+       LightSwitch MACHINE switch, light {
+               on WHEN switch IS on;
+               off DEFAULT;
 
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>                ENTER on  { SET light TO on; }</h2>
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>                ENTER off { SET light TO off; }</h2>
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>        }</h2>
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>        ###</h2>
-</section>
-<section class="lca-slide"  data-state="normal-slide" >
-	<h2>        Controls 'light' based on the state of 'switch'</h2>
+               ENTER on  { SET light TO on; }
+               ENTER off { SET light TO off; }
+       }
+</code></pre>
+	<p>
+	Controls 'light' based on the state of 'switch'
+	</p>
 
 
 	<aside class="notes">
@@ -458,9 +442,6 @@
 	<aside class="notes">
 		 Clockworks tools for debugging are highly effective and are bases round current state description along with explanation 
 <br/>
-<br/>
-<br/>
-<br/>
 	</ul>
 	</aside>
 </section>
@@ -508,62 +489,97 @@
 	<p>
 	device connector - bridge to TCP/IP or serial devices
 	</p>
-
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
-	<h2>User Interface Tools </h2>
+	<h2>Tools</h2>
 	<p>
-	Web UI - basic web applicationfor monitoring and control
+	iosh
 	</p>
-	<p>
-	humid - GUI development tool
-	</p>
-	<p>
-	web 3D visualisation - render a model in 3D
-	</p>
-	<p>
-	scope - character based graphing for sampler 
-	</p>
+<pre><code>
+ DESCRIBE O24V_GrabControlFan ;
+--------------
+24V_GrabControlFan: off  Class: POINT 
+instantiated at: /opt/latproc/code/config/config.lpc line:94
+ parameter 1 module (EL2828_01), state: OP
+ parameter 2 1 ()
 
-	<aside class="notes">
-		 The original user interface we a basic web page that 
-		 displayed the status of the IO on separate tabs, 
-		 for example a tab for Inputs and one for Outputs
-		 Each Clockwork machine can have a parameter that
-		 indicates where it's status should be displayed.
-<br/>
-		 Lately we have been using a new tool, Humid, that
-		 provides standard user interface tools and
-		 also includes features for real-time graphing
-		 of time-series data and can display images
-		 from web cameras or other sites.
-<br/>
-		 We have demonstrated how to render and control
-		 3D models of the machinery but this is not
-		 something we do for normal user interfaces
-<br/>
-	</aside>
+io: readtime: 185932 [Channel 2 Output, 1 0:1.1]=0 (0)
+xports:
+ O24V_GrabControlFan
+ published (1)
+istening to: 
+ EL2828_01[123]:   OP
+
+ependant machines: 
+ L_Inputs[399]:   nonempty
+ M_ControlFan[580]:   off
+
+roperties:
+ NAME:O24V_GrabControlFan, STATE:off, export:0, tab:Outputs, type:Output, wire:Y52
+
+imer: 20713486
+
+
+##
+
+ools
+sampler
+-- sampler captures a stream of state and property changes
+-- extermally effective debug tool
+</code></pre>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
-	<h2>Open Source components</h2>
-	<p>
-	Linux, GNU compiler suite
-	</p>
-	<p>
-	cJSON, libmodbus, ZeroMQ
-	</p>
-	<p>
-	EtherLAB, libXML, three.js
-	</p>
-	<p>
-	nanogui, glfw
-	</p>
-	<p>
-	etc.,
-	</p>
+	<h2>443391 M_CO2 idle</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>443891 M_CO2 update</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>443892 XA_CO2 CO2_Level 496</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>443892 XA_CO2 message 496</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>443892 M_CO2 idle</h2>
+<pre><code>
 
-	<aside class="notes">
-		 these are some of the Open Source tools we use within the latproc tool set
+
+ser Interface Tools 
+Web UI - basic web applicationfor monitoring and control
+humid - GUI development tool
+	Buttons (toggle, momentary)
+	Text and Number Entry Fields
+	Page switching
+	Element visablity control
+	Time series graphing
+web 3D visualisation - render a model in 3D
+scope - character based graphing for sampler 
+
+-- The original user interface we a basic web page that 
+-- displayed the status of the IO on separate tabs, 
+-- for example a tab for Inputs and one for Outputs
+-- Each Clockwork machine can have a parameter that
+-- indicates where it's status should be displayed.
+
+-- Lately we have been using a new tool, Humid, that
+-- provides standard user interface tools and
+-- also includes features for real-time graphing
+-- of time-series data and can display images
+-- from web cameras or other sites.
+
+-- We have demonstrated how to render and control
+-- 3D models of the machinery but this is not
+-- something we do for normal user interfaces
+
+pen Source components
+Linux, GNU compiler suite
+cJSON, libmodbus, ZeroMQ
+EtherLAB, libXML, three.js
+nanogui, glfw
+etc.,
+
+-- these are some of the Open Source tools we use within the latproc tool set
 </section>
 </div>
 		<!-- ... and here -->
