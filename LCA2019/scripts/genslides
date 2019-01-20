@@ -15,7 +15,7 @@ fi
 cat $files \
 	| tr '\t' '`' \
 	| awk -F\` '
-      BEGIN { printf "<div class=\"slides\">\n"; inslide = 0; incode = 0; inaside = 0; }
+      BEGIN { printf "<div class=\"slides\">\n"; inslide = 0; incode = 0; inaside = 0; slideNum = 0;}
 			$1 != "" && incode == 0 { 
 					if (inlist==1) {inlist = 0; printf "\t</ul>\n" }
 					if (inaside>0) {printf "\t</aside>\n"; inaside = 0; }
@@ -25,7 +25,7 @@ cat $files \
 						printf("<section style=\"text-align: left;\" data-background-image=\"css/theme/lca2019-title-bg-transparent.svg\">\n\t<h2>%s</h2>\n",$1); 
 					}
 					else {
-						printf "<section style=\"text-align: left; zoom:80%%\" \">\n\t<h2>%s</h2>\n",$1; 
+						printf "<section class=\"lca-slide\" \">\n\t<h2>%s</h2>\n",$1; 
 					}
 					inslide=1
 			}
