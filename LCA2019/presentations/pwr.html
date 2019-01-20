@@ -131,14 +131,18 @@
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Capabilities</h2>
 	<p>
-	BeckHoff EtherCAT(tm) based control
+	Industrial IO (real world connections)
 	</p>
+	<ul>
+	<li>		BeckHoff EtherCAT(tm) based control</li>
+	
 	<aside class="notes">
 		 Current able to interface to Ethercat Industrial Hardware
 		 Very high speed updated rates
 </aside>
+	</ul>
 	<p>
-	Humid
+	Humid (Human Machine Interface)
 	</p>
 	<aside class="notes">
 		 Human Interface Device
@@ -240,28 +244,25 @@
 	</aside>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
-	<h2>What did we Do? (the first attempt)</h2>
+	<h2>What did we Do?</h2>
 	<p>
-	Moved to a Linux based solution
+	(the first attempt)
 	</p>
-	<p>
-	Programmed a solution with custom messaging and communications
-	</p>
-	<p>
-	Programming took too long
-	</p>
-	<p>
-	Result was not really what we wanted
-	</p>
-	<p>
-	Program was not very reusable
-	</p>
-	<p>
-	We discovered state machines
-	</p>
-	<p>
-	We went back to PLCs
-	</p>
+	<ul>
+	<li>		Moved to a Linux based solution</li>
+	
+	<li>		Programmed a solution with custom messaging and communications</li>
+	
+	<li>		Programming took too long</li>
+	
+	<li>		Result was not really what we wanted</li>
+	
+	<li>		Program was not very reusable</li>
+	
+	<li>		We discovered state machines</li>
+	
+	<li>		We went back to PLCs</li>
+	
 
 	<aside class="notes">
 		 At first when we moved towards using a Linux-based control
@@ -273,6 +274,7 @@
 <br/>
 		 A good thing that came out of the process was that we learnt about state machines
 <br/>
+	</ul>
 	</aside>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
@@ -312,7 +314,7 @@
 	</aside>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
-	<h2>Retaining Control</h2>
+	<h2>Starting again</h2>
 	<p>
 	Simple programming language
 	</p>
@@ -323,8 +325,38 @@
 	Machines can be simulated easily
 	</p>
 	<p>
-	Machine stated resemble physical states and behaviour
+	A Machines state resemble physical states and behaviour
 	</p>
+
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>        ###</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>        LightSwitch MACHINE switch, light {</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>                on WHEN switch IS on;</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>                off DEFAULT;</h2>
+
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>                ENTER on  { SET light TO on; }</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>                ENTER off { SET light TO off; }</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>        }</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>        ###</h2>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>        Controls 'light' based on the state of 'switch'</h2>
+
 
 	<aside class="notes">
 		 The design is based on what we have learnt
