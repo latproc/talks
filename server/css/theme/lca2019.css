@@ -35,27 +35,38 @@ body {
 .footer-white {
     color: #387A3B;
     background-color: #fff;
-    background-image: url("lca2019-logo-green.png");
-    height: 74px;
-    left:-20px;
+    /*background-image: url("lca2019-logo-green.png");*/
+    height: 96px;
+    /*left:-20px;*/
 }
 
 .footer-green {
-    background-image: url("lca2019-logo.svg");
+    /*background-image: url("lca2019-logo.svg");*/
     height: 96px;
+}
+
+.reveal .footer .left-side {
+    text-align: left;
+    float:left;
+}
+.reveal .footer .right-side {
+    text-align: right;
+    float: right;
 }
 
 .reveal .footer {
     position: absolute;
-    bottom: 1em;
+    bottom: 0em;
     right: 2em;
-    text-align: right;
-    font-size: 0.5em;
-    width: 100%;
+    
+    font-size: 0.7em;
+    width: 90%;
+    left: 5em;
     background-repeat: no-repeat;
-    display: flex;
+    line-height: 1.3;
+    /*display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: flex-end;*/
     z-index: 1;
 }
 
@@ -65,11 +76,11 @@ body {
 }
 
 .reveal .footer .theme {
-    padding-right: 80px;
+    /*padding-right: 80px;*/
 }
 
 .reveal .footer .hashtag {
-    padding-right: 80px;
+    p/*adding-right: 80px;*/
 }
 
 @media only screen and (max-width:800px) {
@@ -104,7 +115,7 @@ body {
 
 .reveal {
     font-family: "Space Mono", Helvetica, sans-serif;
-    font-size: 42px;
+    font-size: 32px;
     font-weight: normal;
     color: #fff;
 }
@@ -153,11 +164,11 @@ body {
 }
 
 .reveal h2 {
-    font-size: 1.6em;
+    font-size: 1.4em;
 }
 
 .reveal h3 {
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 .reveal h4 {
