@@ -1,11 +1,12 @@
-latproc (Language And Tools for Process Control)
+latproc 
+	Language And Tools for Process Control
 	-- TODO add image of bales on gravity feed from Ron spec document
-	First published 2012
+		First published 2012
 	-- latproc project is used for process control of hydraulic and pneumatic machinery.
 	-- Developed initially for Wooltech Wool Sampling machines
-	Linux hosted
-	Open Source under BSD and GPL
-	Developed a language which we call Clockwork
+		Linux hosted
+		Open Source under BSD and GPL
+		Developed a language which we call Clockwork
 	-- which we will talk about later
 
 Capabilities
@@ -42,24 +43,24 @@ Going Back
 	-- machines using newer models of the Koyo PLCs
 
 Issues we Experienced
-	Long Term Hardware support is hard
+	Long term custom hardware support is hard
 
-	Closed binary file formats for hardware programming
-	Industrial hardware is upgraded with forward only compatible file formats.
+	Commerical solutions use binary file formats for source config
+	Industrial hardware is upgraded with forward only source formats.
 	External expertise often required
 		Initially in building controller boards
 		Later in writing control software
 	Hard to find industrially experienced coders
 	-- The machines that Wooltech build tend to be in service for 20 years or so
 	-- before they receive any major servicing or refurbishment. Over that period
-	-- Lots of things change with the components that make up the machinery
-	-- Even from a programming point of view, it is 
+	-- lots of things change with the components that make up the machinery
+	-- even from a programming point of view, it is 
 	-- hard to maintain a relationship with external people for software maintenance
 	-- without large amount of ongoing work.
 	-- We do not like to have to depend on external people for our core business, especially where support and
 	-- ongoing maintenance activities are needed.
 
-What did we Do?
+What did we Do? (the first attempt)
 	Moved to a Linux based solution
 	Programmed a solution with custom messaging and communications
 	Programming took too long
@@ -78,11 +79,11 @@ What did we Do?
 	-- A good thing that came out of the process was that we learnt about state machines
 
 Our Requirements
-	Retain Control
-	Reduce Risk
-	Be Future-proof
+	Retain control
+	Reduce risk
+	Be future-proof
 	Reuse Don't Rewrite
-	Version Control all source code
+	Version control all source code
 
 	-- Wooltech found the control development risks for 
 	-- new/refurbished sampling lines became 
