@@ -79,14 +79,24 @@
 
 	<!-- Start of main presentation -->
 	<div class="reveal">
-		<div class="footer">
+		<div class="footer footer-green" id="lca-footer">
 			<span class="theme">The Linux of Things</span><span class="hashtag"> | #LCA2019</span><span class="twitter"> |
 				@linuxconfau</span>
 		</div>
 		<!-- include user data between here... -->
 <div class="slides">
-<section style="text-align: left;" data-background-image="css/theme/lca2019-title-bg-transparent.svg">
+<section style="text-align: left;"  data-state="title-slide" data-background-image="css/theme/lca2019-title-bg-transparent.svg">
 	<h2>Clockwork Language</h2>
+	<p>
+	A look at the code
+	</p>
+	<p>
+	Mike O'Connor
+	</p>
+
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Language Features</h2>
 	<p>
 	Rule based
 	</p>
@@ -100,8 +110,20 @@
 	Highly reusable code
 	</p>
 
+	<aside class="notes">
+		 There are a few key features that distinguish our 
+		 clockwork language. It uses rules to automatically
+		 decide what state parts of a system are in.
+<br/>
+		 It is highly parallel and since clockwork components
+		 run continuously there is no need for loops
+<br/>
+		 We fund that the components we build tend to be 
+		 easy to reuse.
+<br/>
+	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Defining states</h2>
 <pre><code>
 Light MACHINE {
@@ -126,7 +148,7 @@ Light MACHINE {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Using transitions</h2>
 
 <pre><code>
@@ -156,7 +178,7 @@ ToggleSwitch MACHINE {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Situation Normal</h2>
 	<p>
 	MACHINEs can have STATEs
@@ -179,7 +201,7 @@ ToggleSwitch MACHINE {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Using rules</h2>
 
 <pre><code>
@@ -217,7 +239,7 @@ Blinker MACHINE {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Controlling things</h2>
 
 <pre><code>
@@ -248,7 +270,7 @@ LightSwitch MACHINE switch, light {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>No Loops or Ifs?</h2>
 
 <pre><code>
@@ -282,7 +304,7 @@ Counter MACHINE {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>No If statements?</h2>
 
 <pre><code>
@@ -312,7 +334,7 @@ Counter MACHINE {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Counting up</h2>
 
 <pre><code>
@@ -332,7 +354,7 @@ Counter MACHINE {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Reusing components</h2>
 
 <pre><code>
@@ -363,7 +385,7 @@ LightSwitch MACHINE switch, light {
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Controlling multiple things at once</h2>
 
 <pre><code>
@@ -447,6 +469,19 @@ controller LightController yard_lights;
 				},
 			]
 		});
+		Reveal.addEventListener( 'title-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-white");
+			footer.classList.add("footer-green");
+			document.body.style.background = "#387A3B"
+		} );
+		Reveal.addEventListener( 'normal-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-green");
+			footer.classList.add("footer-white");
+			document.body.style.background = "#fff"
+		} );
+
 	</script>
 </body>
 

@@ -79,13 +79,13 @@
 
 	<!-- Start of main presentation -->
 	<div class="reveal">
-		<div class="footer">
-			<span class="theme">The Linux of Things</span><span class="hashtag"> | #LCA2019</span><span class="twitter"> |
-				@linuxconfau</span>
+		<div class="footer theme footer-green" id="lca-footer">
+				The Linux of Things</span><span class="hashtag"> | #LCA2019</span><span class="twitter"> |
+				@linuxconfau
 		</div>
 		<!-- include user data between here... -->
 <div class="slides">
-<section style="text-align: left;" data-background-image="css/theme/lca2019-title-bg-transparent.svg">
+<section style="text-align: left;"  data-state="title-slide" data-background-image="css/theme/lca2019-title-bg-transparent.svg">
 	<h2>Clockwork</h2>
 	<p>
 	Programming with rules
@@ -94,7 +94,7 @@
 	Mike O'Connor
 	</p>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>latproc (Language And Tools for Process Control)</h2>
 	<aside class="notes">
 		 TODO add image of bales on gravity feed from Ron spec document
@@ -120,7 +120,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Capabilities</h2>
 	<p>
 	BeckHoff EtherCAT(tm) based control
@@ -160,7 +160,7 @@
 	</ul>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Going Back</h2>
 	<p>
 	Wooltech - 40 years of automation
@@ -195,7 +195,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Issues we Experienced</h2>
 	<p>
 	Long Term Hardware support is hard
@@ -231,7 +231,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>What did we Do?</h2>
 	<p>
 	Moved to a Linux based solution
@@ -267,7 +267,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Our Requirements</h2>
 	<p>
 	Retain Control
@@ -303,7 +303,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Retaining Control</h2>
 	<p>
 	Simple programming language
@@ -340,7 +340,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Reducing Risk</h2>
 	<p>
 	By programming ourselves
@@ -371,7 +371,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Future-proofing</h2>
 	<p>
 	Use Linux
@@ -382,7 +382,7 @@
 
 
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Version Control everything</h2>
 	<p>
 	Proprietary, binary data formats make version control impossible
@@ -403,7 +403,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Debugging</h2>
 	<p>
 	Effective debugging tools
@@ -424,7 +424,7 @@
 	</ul>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Clockwork</h2>
 	<p>
 	The latproc language
@@ -445,7 +445,7 @@
 	Machines monitor each other
 	</p>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Tools</h2>
 	<p>
 	iod - main EtherCAT control daemon
@@ -470,7 +470,7 @@
 	</p>
 
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>User Interface Tools </h2>
 	<p>
 	Web UI - basic web applicationfor monitoring and control
@@ -504,7 +504,7 @@
 <br/>
 	</aside>
 </section>
-<section style="text-align: left; zoom:80%" ">
+<section class="lca-slide"  data-state="normal-slide" >
 	<h2>Open Source components</h2>
 	<p>
 	Linux, GNU compiler suite
@@ -587,6 +587,19 @@
 				},
 			]
 		});
+		Reveal.addEventListener( 'title-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-white");
+			footer.classList.add("footer-green");
+			document.body.style.background = "#387A3B"
+		} );
+		Reveal.addEventListener( 'normal-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-green");
+			footer.classList.add("footer-white");
+			document.body.style.background = "#fff"
+		} );
+
 	</script>
 </body>
 

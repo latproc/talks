@@ -1,8 +1,22 @@
 Clockwork Language
+	A look at the code
+	Mike O'Connor
+
+Language Features
 	Rule based
 	Automatic state selection
 	No Loop statements
 	Highly reusable code
+
+	-- There are a few key features that distinguish our 
+	-- clockwork language. It uses rules to automatically
+	-- decide what state parts of a system are in.
+
+	-- It is highly parallel and since clockwork components
+	-- run continuously there is no need for loops
+
+	-- We fund that the components we build tend to be 
+	-- easy to reuse.
 
 Defining states
 	###
