@@ -108,7 +108,7 @@ Starting again
 	Machines can be simulated easily
 	A Machines state resemble physical states and behaviour
 
-        ###
+	###
         LightSwitch MACHINE switch, light {
                 on WHEN switch IS on;
                 off DEFAULT;
@@ -116,8 +116,8 @@ Starting again
                 ENTER on  { SET light TO on; }
                 ENTER off { SET light TO off; }
         }
-        ###
-        Controls 'light' based on the state of 'switch'
+	###
+	Controls 'light' based on the state of 'switch'
 
 
 	-- The design is based on what we have learnt
@@ -182,7 +182,4 @@ Debugging
 		Predicate explanation
 		continues sampling of the state and properties changes.
 	-- Clockworks tools for debugging are highly effective and are bases round current state description along with explanation 
-
-
-
 
