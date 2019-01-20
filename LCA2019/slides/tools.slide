@@ -33,12 +33,10 @@ properties:
 Timer: 20713486
 
 >
-###
+	###
 
 Tools
 	sampler
-	-- sampler captures a stream of state and property changes
-	-- extermally effective debug tool
 	###
 443391 M_CO2 idle
 443891 M_CO2 update
@@ -46,6 +44,8 @@ Tools
 443892 XA_CO2 message 496
 443892 M_CO2 idle
 	###
+	-- sampler captures a stream of state and property changes
+	-- extermally effective debug tool
 
 
 User Interface Tools 

@@ -1,6 +1,10 @@
 latproc 
 	Language And Tools for Process Control
 	-- TODO add image of bales on gravity feed from Ron spec document
+	<div style="float:right; width:50%;">
+	<img src="img/HumidScreen.jpg">
+	</div>
+
 		First published 2012
 	-- latproc project is used for process control of hydraulic and pneumatic machinery.
 	-- Developed initially for Wooltech Wool Sampling machines
