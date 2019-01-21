@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# render some slides to create a presentation
+
+trap 'rm -f /tmp/genslides.$$' 0 1 2 15
+
+function usage() {
+	echo "usage: $0 target-html [-f presentation-file] [ slide-file ...]"
+}
+
+if [ "$2" = "" ]; then
+	usage
+  exit 1;
+fi
+
+targetfile="$1"
+CMDDIR="`dirname $0`"
+SERVERDIR="$CMDDIR/../../server"
+PRESENTATIONDIR="$CMDDIR/../presentations"
+HOME="`pwd`"
+CONFDIR="`basename $HOME`"
+
+if [ ! -d "$SERVERDIR" ]; then
+	echo "can't find the server directory, expect it to be at $SERVERDIR"
+	exit 2
+fi
+
+if [ ! -d "$PRESENTATIONDIR" ]; then
+	echo "can't find the presentations directory, expect it to be at $PRESENTATIONSDIR"
+	exit 2
+fi
+
+shift
+
+cp $SERVERDIR/master.html "$PRESENTATIONDIR/$targetfile" || exit 3
+"$CMDDIR"/genslides $* >/tmp/genslides.$$ || exit 4
+"$CMDDIR"/insert "$PRESENTATIONDIR/$targetfile" /tmp/genslides.$$
+
+cd $SERVERDIR
+
+# create symbolic link to the presentation in the server dir
+if [ ! -L "$targetfile" ]; then
+	ln -s ../$CONFDIR/presentations/"$targetfile" "$targetfile"
+	echo "created symbolic link. presentation can be accessed from: http://localhost:8000/$targetfile"
+fi
