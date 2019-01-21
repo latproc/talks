@@ -1,9 +1,6 @@
 latproc 
 	Language And Tools for Process Control
 	-- TODO add image of bales on gravity feed from Ron spec document
-	<div style="float:right; width:50%;">
-	<img src="img/HumidScreen.jpg">
-	</div>
 
 		First published 2012
 	-- latproc project is used for process control of hydraulic and pneumatic machinery.
@@ -31,6 +28,9 @@ Capabilities
 	-- Why would we do this, lets go back
 
 Going Back
+	<img src="img/MosesInfeedFrontRHV2.jpg">
+
+Going Back
 	Wooltech - 40 years of automation
 	Electrical time and relay logic
 	Scorpion board John Langford and lots of extra boards
@@ -46,6 +46,11 @@ Going Back
 	-- Early Koyo based PLCs were used by Wooltech up to about 1995 with a second series developed 
 	-- After trying a Linux based C++ system we built a few more 
 	-- machines using newer models of the Koyo PLCs
+
+Issues we Experienced
+	<div style="width:50%;">
+	<img src="img/WTL1.0-inplace.jpg">
+	</dev>
 
 Issues we Experienced
 	Long term custom hardware support is hard
