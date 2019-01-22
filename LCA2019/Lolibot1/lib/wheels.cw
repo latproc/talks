@@ -3,8 +3,9 @@ WHEELDIRECTION MACHINE O_Fwd, O_Rev {
 	OPTION last_v 0;
 	OPTION max_v 32000;
 
-	rev WHEN SELF IS moving && last_v != VALUE && VALUE < 0;
-	fwd WHEN SELF IS moving && last_v != VALUE && VALUE > 0;
+	idle WHEN SELF IS moving && VALUE >= -10 && VALUE <= 10;
+	rev WHEN SELF IS moving && last_v != VALUE && VALUE < -10;
+	fwd WHEN SELF IS moving && last_v != VALUE && VALUE > 10;
 	moving WHEN VALUE != 0;
 	idle DEFAULT;
 
