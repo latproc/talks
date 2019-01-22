@@ -5,7 +5,6 @@
 START_MARK=' include user data between here... '
 END_MARK=' ... and here '
 
-
 if [ ! -r "$1" ]; then
   echo usage: `basename $0` master-file [ snippet-file ]
   exit 2
@@ -14,14 +13,23 @@ fi
 master="$1"
 snippet=$2
 
-cp "$master" "$master".bak
+if [ ! -f "$master" ]; then
+	echo "can't file master file $master"
+	exit 1
+fi
+if [ ! -f "$snippet" ]; then
+	echo "can't file snippet file $snippet"
+	exit 1
+fi
+
+cp "$master" "$master".bak || exit 3
 
 cat "$master" | awk -v marker="$START_MARK" '
 	seen != 1 {print}
   $0 ~ marker {seen = 1}
-' > "$master".new
+' > "$master".new || exit 4
 
-cat $snippet >> "$master".new
+cat $snippet >> "$master".new || exit 5
 
 cat "$master" | awk -v marker="$END_MARK" '
   $0 ~ marker {seen = 1}

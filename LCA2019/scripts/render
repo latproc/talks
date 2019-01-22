@@ -1,24 +1,65 @@
 #!/bin/bash
 #
-# render some slides to create a presentation
+if [ "$1" = "--wiz" ]; then
+ cat <<EOW
+-f listfile  name of a file containing the slides to be presented
+-o output  name of the output html file
+EOW
+ exit
+ fi
 
+listfile=
+output=
+[ -r defaults.sh ] && . defaults.sh
+args=`getopt f:o: -- "$@"`
+if [ $? != 0 ]; then 
+ echo "Valid options: "
+  $0 --wiz 
+ exit 2 
+ fi
+
+#set -- $args
+ for i
+ do
+  case "$i"
+   in
+-f) #  name of a file containing the slides to be presented
+     listfile="$2"; shift;  shift;
+   ;;
+-o) #  name of the output html file
+     output="$2"; shift;  shift;
+   ;;
+  --)
+    shift; break
+   esac
+done
+#
+#
+# insert your code here
+#echo listfile=$listfile
+#echo output=$output
+
+#trap 'mv /tmp/genslides.$$ /tmp/a' 0 1 2 15
 trap 'rm -f /tmp/genslides.$$' 0 1 2 15
 
+# render some slides to create a presentation
+
 function usage() {
-	echo "usage: $0 target-html [-f presentation-file] [ slide-file ...]"
+	echo "usage: $0 [-f presentation-file] [ -o output-file ] [ slide-file ...]"
 }
 
-if [ "$2" = "" ]; then
-	usage
-  exit 1;
-fi
+[ "$output" = "" ] && output=index.html
 
-targetfile="$1"
-CMDDIR="`dirname $0`"
-SERVERDIR="$CMDDIR/../../server"
-PRESENTATIONDIR="$CMDDIR/../presentations"
+# use the location of this script to setup paths if needed
+[ "$PROJDIR" = "" ] && PROJDIR="`dirname $0`/../.."
+
+targetfile="$output"
+CMDDIR="$PROJDIR/LCA2019/scripts"
+SERVERDIR="$PROJDIR/server"
+PRESENTATIONDIR="$PROJDIR/LCA2019/presentations"
 HOME="`pwd`"
 CONFDIR="`basename $HOME`"
+SLIDEDIR=$PROJDIR/LCA2019/slides
 
 if [ ! -d "$SERVERDIR" ]; then
 	echo "can't find the server directory, expect it to be at $SERVERDIR"
@@ -30,16 +71,37 @@ if [ ! -d "$PRESENTATIONDIR" ]; then
 	exit 2
 fi
 
-shift
+slidelist=""
+[ ! "$listfile" = "" ] && slidelist="`cat $listfile`"
+
+#[ ! "$listfile" = "" ] && listfile="-f $HOME/$listfile"
+#if [ ! -f $listfile ] ; then
+#  echo "cannot file slide list file $listfile"
+#  exit 2
+#fi
+
+for i in $slidelist $*; do
+	f="$i"
+	[ ! -f "$i" ] && f="$SLIDEDIR/$i"
+	if [ ! -f "$f" ]; then 
+		echo "cannot find '$i' or '$f'"
+		exit 1;
+	fi
+	slidefiles="$slidefiles $f"
+done
 
 cp $SERVERDIR/master.html "$PRESENTATIONDIR/$targetfile" || exit 3
-"$CMDDIR"/genslides $* >/tmp/genslides.$$ || exit 4
+"$CMDDIR"/genslides $slidefiles  >/tmp/genslides.$$ || exit 4
+
 "$CMDDIR"/insert "$PRESENTATIONDIR/$targetfile" /tmp/genslides.$$
+[ $? -eq 0 ] || exit $?
 
 cd $SERVERDIR
 
 # create symbolic link to the presentation in the server dir
+ln -sf ../LCA2019/presentations/"$targetfile" index.html
+echo "presentation can be accessed from: http://localhost:8000/"
 if [ ! -L "$targetfile" ]; then
-	ln -s ../$CONFDIR/presentations/"$targetfile" "$targetfile"
-	echo "created symbolic link. presentation can be accessed from: http://localhost:8000/$targetfile"
+	ln -s ../LCA2019/presentations/"$targetfile" "$targetfile"
+	echo "created symbolic link. presentation can also be accessed from: http://localhost:8000/$targetfile"
 fi

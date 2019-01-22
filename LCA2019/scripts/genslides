@@ -1,18 +1,34 @@
 #!/bin/sh
 
-SLIDEDIR=slides
-
-if [ $1 = "-f" ]; then
+if [ "$1" = "-f" ]; then
   shift
   files=`cat $1`
 else
   files=$*
 fi
-if [ -d $SLIDEDIR ]; then
-	cd $SLIDEDIR || exit 2
+
+# use the location of this script to setup paths if needed
+if [ "$SLIDEDIR" = "" ]; then
+	[ "$PROJDIR" = "" ] && PROJDIR="`dirname $0`/../.."
+	SLIDEDIR="$PROJDIR/LCA2019/slides"
 fi
+
+#if [ -d $SLIDEDIR ]; then
+#	cd $SLIDEDIR || exit 2
+#fi
 #      {printf "incode: %d, inaside: %d inslide: %d\n", incode, inaside, inslide}
-cat $files \
+slidefiles=""
+for i in $files; do
+	f="$i"
+	[ ! -f "$i" ] && f="$SLIDEDIR/`basename $i`"
+	if [ ! -f "$f" ]; then 
+		echo "cannot find '$i' or '$f'"
+		exit 1;
+	fi
+	slidefiles="$slidefiles $f"
+done
+
+cat $slidefiles \
 	| tr '\t' '`' \
 	| awk -F\` '
       BEGIN { printf "<div class=\"slides\">\n"; inslide = 0; incode = 0; inaside = 0; slideNum = 0;}
