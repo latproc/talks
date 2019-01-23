@@ -3,12 +3,12 @@
 esp32 ESP32; # CPU defined in the runtime support
 lolibot LOLIBOT esp32;
 
-controller MQTTBROKER "10.193.4.235", 1883;
+controller MQTTBROKER "192.168.2.10", 1883;
 
 WS2812B_V3 LEDCONFIGURATION (bytesPerPixel:3, T0H:350, T1H:700, T0L:800, T1L:600, TRS:50000);
 
-XA_WheelRight MQTTSUBSCRIBER controller, "slider_x"; # +/- 100 is forward/reverse
-XA_WheelLeft MQTTSUBSCRIBER controller, "slider_y"; # +/- 100 is forward/reverse
+XA_WheelRight MQTTSUBSCRIBER controller, "slider_y"; # +/- 100 is forward/reverse
+XA_WheelLeft MQTTSUBSCRIBER controller, "slider_x"; # +/- 100 is forward/reverse
 XA_Servo MQTTSUBSCRIBER controller, "servo"; # 
 
 XA_Led0Red MQTTSUBSCRIBER controller, "light_0_r";
