@@ -14,7 +14,7 @@ latproc
 		Developed a language which we call Clockwork
 	-- which we will talk about later
 
-Capabilities
+Original Design Capabilities
 	Industrial IO (real world connections)
 		BeckHoff EtherCAT(tm) based control
 	-- Current able to interface to Ethercat Industrial Hardware
@@ -29,10 +29,12 @@ Capabilities
 			- libcurl
 			- exec system
 		MQTT
-	-- Why would we do this, lets go back
 
 What it was develop for
 	<img src="img/MosesInfeedFrontRHV2.jpg">
+
+
+
 
 Clockwork
 	The latproc language
