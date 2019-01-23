@@ -1,0 +1,289 @@
+Clockwork
+	Programming with rules
+	Mike O'Connor
+latproc 
+	Language And Tools for Process Control
+	-- TODO add image of bales on gravity feed from Ron spec document
+
+		First published 2012
+	-- latproc project is used for process control of hydraulic and pneumatic machinery.
+	-- Developed initially for Wooltech Wool Sampling machines
+		Linux hosted
+		Open Source under BSD and GPL
+		Developed a language which we call Clockwork
+	-- which we will talk about later
+
+Capabilities
+	Industrial IO (real world connections)
+		BeckHoff EtherCAT(tm) based control
+	-- Current able to interface to Ethercat Industrial Hardware
+	-- Very high speed updated rates
+	Humid (Human Machine Interface)
+	-- Human Interface Device
+	Protocols
+	-- Number of protocols both industrial in nature and custom using TCP/IP and plugins
+		Modbus master/slave
+		Raw TCP/IP and serial UART (device_connector)
+		Plugins
+			- libcurl
+			- exec system
+		MQTT
+	-- Why would we do this, lets go back
+
+Going Back
+	<img src="img/MosesInfeedFrontRHV2.jpg">
+
+Going Back
+	Wooltech - 40 years of automation
+	Electrical time and relay logic
+	Scorpion board John Langford and lots of extra boards
+	Custom Zilog Z80 board with inputs and relays
+	Early PLCs by Koyo (rebadged by GE and others)
+	Custom software on Linux (late 90s) 
+	Back to Koyo PLCs during the 2000s using newer models
+
+	-- Wooltech has 40 years of develop machines that needed control
+	-- From electrical time and relay logic, to a Scorpion board
+	-- and then a Zilog Z80-based board with inputs and relays
+	-- that was programmed with a macro-assembler. 
+	-- Early Koyo based PLCs were used by Wooltech up to about 1995 with a second series developed 
+	-- After trying a Linux based C++ system we built a few more 
+	-- machines using newer models of the Koyo PLCs
+
+Issues we Experienced
+	<div style="width:50%;">
+	<img src="img/WTL1.0-inplace.jpg">
+	</dev>
+
+Issues we Experienced
+	Long term custom hardware support is hard
+
+	Commerical solutions use binary file formats for source config
+	Industrial hardware is upgraded with forward only source formats.
+	External expertise often required
+		Initially in building controller boards
+		Later in writing control software
+	Hard to find industrially experienced coders
+	-- The machines that Wooltech build tend to be in service for 20 years or so
+	-- before they receive any major servicing or refurbishment. Over that period
+	-- lots of things change with the components that make up the machinery
+	-- even from a programming point of view, it is 
+	-- hard to maintain a relationship with external people for software maintenance
+	-- without large amount of ongoing work.
+	-- We do not like to have to depend on external people for our core business, especially where support and
+	-- ongoing maintenance activities are needed.
+
+What did we Do?
+	(the first attempt)
+		Moved to a Linux based solution
+		Programmed a solution with custom messaging and communications
+		Programming took too long
+		Result was not really what we wanted
+		Program was not very reusable
+		We discovered state machines
+		We went back to PLCs
+
+	-- At first when we moved towards using a Linux-based control
+	-- system we had some software developed in C++ along with a custom
+	-- messaging system between components.
+	-- Overall, software produced met the performance requirements
+	-- but we really needed more of a reusable softer driver
+	-- rather than a monolithic application.
+
+	-- A good thing that came out of the process was that we learnt about state machines
+
+Our Requirements
+	Retain control
+	Reduce risk
+	Be future-proof
+	Reuse Don't Rewrite
+	Version control all source code
+
+	-- Wooltech found the control development risks for 
+	-- new/refurbished sampling lines became 
+	-- so prohibitive that we considered moving to other industries.
+
+	-- As part of another project a past colleague, Martin Leadbeater, provided some help 
+	-- with building system health monitoring software within some embedded Linux boxes
+	-- I was building. His approach was to use a Domain Specific Language in an attempt
+	-- to make it easy to write scripts that monitor the state of various subsystems
+	-- within the Linux hosts. 
+
+	-- Together we discussed whether a similar approach might work for the control of
+	-- a new machine that Wooltech was being asked to build.
+	-- After some initial exploration, Martin's design for a Domain Specific Language
+	-- started to take shape and clockwork was born.
+
+Starting again
+	Simple programming language
+	Program pieces are called MACHINEs
+	Machines can be simulated easily
+	A Machines state resemble physical states and behaviour
+
+	###
+        LightSwitch MACHINE switch, light {
+                on WHEN switch IS on;
+                off DEFAULT;
+
+                ENTER on  { SET light TO on; }
+                ENTER off { SET light TO off; }
+        }
+	###
+	Controls 'light' based on the state of 'switch'
+
+
+	-- The design is based on what we have learnt
+	-- programming using state machines and PLCs over many years
+	-- and the business experience before that using a Zilog Z80 platform with custom BIOS and compiler
+
+	-- We have found Clockwork a very effective language to model and control 
+	-- machinery. We can write the code for our machines ourselves without
+	-- needing to engage outside help even when the processing logic is complex.
+
+	-- When writing the code, we think of the behaviour of individual parts of the equipment
+	-- We write clockwork code that represents our understanding of the machine
+	-- behaviour. For example, if a device on the machine can be 'up' or 'down' we
+	-- define a MACHINE in clockwork that has an 'UP' state and a 'DOWN' state.
+	-- If we want to model movement or we want to control the device, we 
+	-- might also add states like 'Moving Up' or 'Moving Down'
+	-- We find this direct relationship between the software and the hardware
+	-- to be have advantages in coding and also in talking about the 
+	-- program and how the machine should behave even with team members who 
+	-- are not programmers.
+
+Reducing Risk
+	By programming ourselves
+	By simulating as we develop
+	By reusing what we have done before
+
+	-- We understand our machinery better than other people and we
+	-- understand the most effective way it should be used. 
+	-- By programming the control ourselves we can be sure that
+	-- the machine will be usable and we can control the 
+	-- development process.
+
+	-- Clockwork makes it fairly simple to simulate components
+	-- of the system and this makes it possible to develop most
+	-- of the code while the machine is being built.
+
+	-- By reusing what we have, simulating as we go and due to 
+	-- the powerful debugging features we are able to program
+	-- the main control for new machines in a few weeks.
+
+
+
+Future-proofing
+	Use Linux
+	Use Open Source Software
+
+
+Version Control everything
+	Proprietary, binary data formats make version control impossible
+	Over time PLC software or HMI panel firmware changes
+	Proprietary, windows-based programming tools do not maintain support for all versions 
+
+	-- Building machinery over an extended period of time leads to situations where
+	-- some sites have one version of a PLC programming tool and others have a different version
+	-- This creates a version control nightmare of 10 installed system each using different 
+	-- hardware / software tools and trying to maintain a single code base is impossible.
+
+
+Debugging
+	Effective debugging tools
+		State Description
+		Predicate explanation
+		continues sampling of the state and properties changes.
+	-- Clockworks tools for debugging are highly effective and are bases round current state description along with explanation 
+
+Clockwork
+	The latproc language
+	Objects are called 'Machine's
+	Describe Machines by their states
+	States are selected by evaluating rules
+	All Machines run continuously in parallel
+	Machines monitor each other
+Tools
+	iod - main EtherCAT control daemon
+	cw - local interpreter daemon
+	iosh - terminal shell
+	sampler - monitoring and logging
+	persistd - monitor and retain persistend state
+	modbusd - bridge to modbus masters (panels)
+	device connector - bridge to TCP/IP or serial devices
+Tools
+	iosh
+	###
+> DESCRIBE O24V_GrabControlFan ;
+---------------
+O24V_GrabControlFan: off  Class: POINT 
+ instantiated at: /opt/latproc/code/config/config.lpc line:94
+  parameter 1 module (EL2828_01), state: OP
+  parameter 2 1 ()
+
+ io: readtime: 185932 [Channel 2 Output, 1 0:1.1]=0 (0)
+Exports:
+  O24V_GrabControlFan
+  published (1)
+Listening to: 
+  EL2828_01[123]:   OP
+
+Dependant machines: 
+  L_Inputs[399]:   nonempty
+  M_ControlFan[580]:   off
+
+properties:
+  NAME:O24V_GrabControlFan, STATE:off, export:0, tab:Outputs, type:Output, wire:Y52
+
+Timer: 20713486
+
+>
+	###
+
+Tools
+	sampler
+	###
+443391 M_CO2 idle
+443891 M_CO2 update
+443892 XA_CO2 CO2_Level 496
+443892 XA_CO2 message 496
+443892 M_CO2 idle
+	###
+	-- sampler captures a stream of state and property changes
+	-- extermally effective debug tool
+
+
+User Interface Tools 
+	Web UI - basic web applicationfor monitoring and control
+	humid - GUI development tool
+		Buttons (toggle, momentary)
+		Text and Number Entry Fields
+		Page switching
+		Element visablity control
+		Time series graphing
+	web 3D visualisation - render a model in 3D
+	scope - character based graphing for sampler 
+
+	-- The original user interface we a basic web page that 
+	-- displayed the status of the IO on separate tabs, 
+	-- for example a tab for Inputs and one for Outputs
+	-- Each Clockwork machine can have a parameter that
+	-- indicates where it's status should be displayed.
+
+	-- Lately we have been using a new tool, Humid, that
+	-- provides standard user interface tools and
+	-- also includes features for real-time graphing
+	-- of time-series data and can display images
+	-- from web cameras or other sites.
+
+	-- We have demonstrated how to render and control
+	-- 3D models of the machinery but this is not
+	-- something we do for normal user interfaces
+
+Open Source components
+	Linux, GNU compiler suite
+	cJSON, libmodbus, ZeroMQ
+	EtherLAB, libXML, three.js
+	nanogui, glfw
+	etc.,
+
+	-- these are some of the Open Source tools we use within the latproc tool set
