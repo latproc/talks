@@ -1,6 +1,6 @@
 esp32 ESP32; # CPU defined in the runtime support
 
-controller MQTTBROKER "10.193.4.235", 1883;
+controller MQTTBROKER "192.168.2.10", 1883;
 
 S_Generic ANALOGINPUTSETTINGS;
 
