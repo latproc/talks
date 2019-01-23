@@ -1,5 +1,6 @@
 Clockwork
-	Programming with rules
+	Clockwork and its tools
+		Open Source Software to make things more easily
 	Mike O'Connor
 latproc 
 	Language And Tools for Process Control
@@ -30,170 +31,8 @@ Capabilities
 		MQTT
 	-- Why would we do this, lets go back
 
-Going Back
+What it was develop for
 	<img src="img/MosesInfeedFrontRHV2.jpg">
-
-Going Back
-	Wooltech - 40 years of automation
-	Electrical time and relay logic
-	Scorpion board John Langford and lots of extra boards
-	Custom Zilog Z80 board with inputs and relays
-	Early PLCs by Koyo (rebadged by GE and others)
-	Custom software on Linux (late 90s) 
-	Back to Koyo PLCs during the 2000s using newer models
-
-	-- Wooltech has 40 years of develop machines that needed control
-	-- From electrical time and relay logic, to a Scorpion board
-	-- and then a Zilog Z80-based board with inputs and relays
-	-- that was programmed with a macro-assembler. 
-	-- Early Koyo based PLCs were used by Wooltech up to about 1995 with a second series developed 
-	-- After trying a Linux based C++ system we built a few more 
-	-- machines using newer models of the Koyo PLCs
-
-Issues we Experienced
-	<div style="width:50%;">
-	<img src="img/WTL1.0-inplace.jpg">
-	</dev>
-
-Issues we Experienced
-	Long term custom hardware support is hard
-
-	Commerical solutions use binary file formats for source config
-	Industrial hardware is upgraded with forward only source formats.
-	External expertise often required
-		Initially in building controller boards
-		Later in writing control software
-	Hard to find industrially experienced coders
-	-- The machines that Wooltech build tend to be in service for 20 years or so
-	-- before they receive any major servicing or refurbishment. Over that period
-	-- lots of things change with the components that make up the machinery
-	-- even from a programming point of view, it is 
-	-- hard to maintain a relationship with external people for software maintenance
-	-- without large amount of ongoing work.
-	-- We do not like to have to depend on external people for our core business, especially where support and
-	-- ongoing maintenance activities are needed.
-
-What did we Do?
-	(the first attempt)
-		Moved to a Linux based solution
-		Programmed a solution with custom messaging and communications
-		Programming took too long
-		Result was not really what we wanted
-		Program was not very reusable
-		We discovered state machines
-		We went back to PLCs
-
-	-- At first when we moved towards using a Linux-based control
-	-- system we had some software developed in C++ along with a custom
-	-- messaging system between components.
-	-- Overall, software produced met the performance requirements
-	-- but we really needed more of a reusable softer driver
-	-- rather than a monolithic application.
-
-	-- A good thing that came out of the process was that we learnt about state machines
-
-Our Requirements
-	Retain control
-	Reduce risk
-	Be future-proof
-	Reuse Don't Rewrite
-	Version control all source code
-
-	-- Wooltech found the control development risks for 
-	-- new/refurbished sampling lines became 
-	-- so prohibitive that we considered moving to other industries.
-
-	-- As part of another project a past colleague, Martin Leadbeater, provided some help 
-	-- with building system health monitoring software within some embedded Linux boxes
-	-- I was building. His approach was to use a Domain Specific Language in an attempt
-	-- to make it easy to write scripts that monitor the state of various subsystems
-	-- within the Linux hosts. 
-
-	-- Together we discussed whether a similar approach might work for the control of
-	-- a new machine that Wooltech was being asked to build.
-	-- After some initial exploration, Martin's design for a Domain Specific Language
-	-- started to take shape and clockwork was born.
-
-Starting again
-	Simple programming language
-	Program pieces are called MACHINEs
-	Machines can be simulated easily
-	A Machines state resemble physical states and behaviour
-
-	###
-        LightSwitch MACHINE switch, light {
-                on WHEN switch IS on;
-                off DEFAULT;
-
-                ENTER on  { SET light TO on; }
-                ENTER off { SET light TO off; }
-        }
-	###
-	Controls 'light' based on the state of 'switch'
-
-
-	-- The design is based on what we have learnt
-	-- programming using state machines and PLCs over many years
-	-- and the business experience before that using a Zilog Z80 platform with custom BIOS and compiler
-
-	-- We have found Clockwork a very effective language to model and control 
-	-- machinery. We can write the code for our machines ourselves without
-	-- needing to engage outside help even when the processing logic is complex.
-
-	-- When writing the code, we think of the behaviour of individual parts of the equipment
-	-- We write clockwork code that represents our understanding of the machine
-	-- behaviour. For example, if a device on the machine can be 'up' or 'down' we
-	-- define a MACHINE in clockwork that has an 'UP' state and a 'DOWN' state.
-	-- If we want to model movement or we want to control the device, we 
-	-- might also add states like 'Moving Up' or 'Moving Down'
-	-- We find this direct relationship between the software and the hardware
-	-- to be have advantages in coding and also in talking about the 
-	-- program and how the machine should behave even with team members who 
-	-- are not programmers.
-
-Reducing Risk
-	By programming ourselves
-	By simulating as we develop
-	By reusing what we have done before
-
-	-- We understand our machinery better than other people and we
-	-- understand the most effective way it should be used. 
-	-- By programming the control ourselves we can be sure that
-	-- the machine will be usable and we can control the 
-	-- development process.
-
-	-- Clockwork makes it fairly simple to simulate components
-	-- of the system and this makes it possible to develop most
-	-- of the code while the machine is being built.
-
-	-- By reusing what we have, simulating as we go and due to 
-	-- the powerful debugging features we are able to program
-	-- the main control for new machines in a few weeks.
-
-
-
-Future-proofing
-	Use Linux
-	Use Open Source Software
-
-
-Version Control everything
-	Proprietary, binary data formats make version control impossible
-	Over time PLC software or HMI panel firmware changes
-	Proprietary, windows-based programming tools do not maintain support for all versions 
-
-	-- Building machinery over an extended period of time leads to situations where
-	-- some sites have one version of a PLC programming tool and others have a different version
-	-- This creates a version control nightmare of 10 installed system each using different 
-	-- hardware / software tools and trying to maintain a single code base is impossible.
-
-
-Debugging
-	Effective debugging tools
-		State Description
-		Predicate explanation
-		continues sampling of the state and properties changes.
-	-- Clockworks tools for debugging are highly effective and are bases round current state description along with explanation 
 
 Clockwork
 	The latproc language
@@ -202,6 +41,244 @@ Clockwork
 	States are selected by evaluating rules
 	All Machines run continuously in parallel
 	Machines monitor each other
+
+Language Features
+	Rule based
+	Automatic state selection
+	No Loop statements
+	Highly reusable code
+
+	-- There are a few key features that distinguish our 
+	-- clockwork language. It uses rules to automatically
+	-- decide what state parts of a system are in.
+
+	-- It is highly parallel and since clockwork components
+	-- run continuously there is no need for loops
+
+	-- We find that the components we build tend to be 
+	-- easy to reuse.
+
+Defining states
+	###
+	Light MACHINE {
+		on STATE;
+		off INITIAL;
+	}
+	###
+	Simple machine
+	No automation
+	Controlled externally
+
+	-- this describes a machine that can be on or off, initially it is off
+	-- This machine does not have any automation, it has to be
+	-- controlled externally by directly setting its state.
+
+Using transitions
+
+	###
+	ToggleSwitch MACHINE {
+		on STATE;
+		off INITIAL;
+
+		TRANSITION on TO off USING next;
+		TRANSITION off TO on USING next;
+	}
+	###
+	Basic automation via transitions
+	Flips state when 'next' message is received
+
+	-- this dscribes a machine that can receive a message called: 'next'
+
+	-- if this machine receives the message, when it is on, it turns off.
+	-- Similarly, if it was off when the message arrives, it turns on.
+
+	-- repeatedly sending the next message will cause the machine to
+	-- toggle between on and off
+
+Situation Normal
+	MACHINEs can have STATEs
+	TRANSITIONS can cause STATEs to change
+	Nothing special so far...
+
+	-- this is all very common and is what all state-based programming
+	-- is like. Essentially, transitions are used to respond to 
+	-- events and programming using state machines is all about 
+	-- sending and responding to events.
+
+	-- Clockwork is not like this and actually we rarely use the
+	-- TRANSITION statement.
+
+Using rules
+
+	###
+	Blinker MACHINE {
+		on WHEN SELF IS off;
+		off DEFAULT;
+	}
+	###
+	Automatic state selection
+	Evaluates rules in sequence
+	Stops at the first rule that is true
+
+	-- here is a machine that has two states, 'on' and 'off'
+
+	-- the 'on' state has a rule given by the WHEN clause
+
+	-- the machine continuously evaluates its rules and none of them
+	-- match (that is, if none of them evaluate as 'TRUE') then
+	-- the machine sets itself into the DEFAULT state.
+
+	-- Looking at the rule on this machine, we see that whenever
+	-- the machine is 'off', the rule for the 'on' state is TRUE
+	-- so the machine turns on. 
+
+	-- If the machine is on, the rule 'SELF IS off' is no longer true so
+	-- the machine cannot stay in the 'on' state. Since there are
+	-- no other states, the machine goes to 'off'
+
+Controlling things
+
+	###
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
+
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+	###
+	Controls 'light' based on the state of 'switch'
+
+	-- When a machine changes state, it check to see if it has to do anything
+	-- by looking for an ENTER statement for the new state. 
+
+	-- In this example, we are controlling a light using about
+	-- switch.
+
+	-- When the switch is turned on, this controller turns the light on.
+
+	-- In clockwork, the switch and the light could be other software 'MACHINE's or
+	-- they could represent hardware devices, such as switches, beams or proximity sensors
+	-- They might even represent the value of a topic in an IoT device.
+
+No Loops or Ifs?
+
+	###
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN count < 10;
+		idle DEFAULT;
+
+		ENTER up { count := count + 1; }
+	}
+	###
+
+	-- There is no while statement, for statement or repeat statement in clockwork
+	-- everything is accomplished with state changes.
+
+	-- In this example, we show a machine that counts up to 10 without a loops
+
+	-- Actually this example has a bug. When the machine starts its count property is set to zero.
+	-- The rules are checked and 'count < 10' is true so the machine enters the 'up' state
+
+	-- When the machine enters the up state, it adds one to count.
+
+	-- Next time the rules are evaluated, count is still < 10 to the machine stays
+	-- in the 'up' state.
+
+	-- Since it has already entered the 'up' state, the machine does not execute the
+	-- ENTER function for 'up' so the machine is stable and sits in the 'up' 
+	-- state forever.
+
+
+No If statements?
+
+	###
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN count < 10;
+		idle DEFAULT;
+
+		ENTER up { 
+			count := count + 1;
+			IF count < 10 { SET SELF TO idle; }
+		}
+	}
+	###
+
+	An ugly fix to the error in the rules
+
+	-- actually, clockwork has if statements but we almost never use them
+
+	-- this example fixes the previous bug using an IF statement.
+
+	-- usually if we think we need to use an if statement, we haven'that
+	-- got the rules right.
+
+Counting up
+
+	###
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN SELF IS idle AND count < 10;
+		idle DEFAULT;
+
+		ENTER up { count := count + 1; }
+	}
+	###
+
+	-- this example fixes the bug in the previous example.
+
+	-- note that it is a lot cleaner and doesn't need an if statement
+
+Reusing components
+
+	###
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
+
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+	###
+
+	-- When machine are linked together, it is important to make
+	-- sure that they have the states and properties that are used in 
+	-- all of the rules and ENTER functions
+
+	-- for example, the machine passed to the LightSwitch must have a state 
+	-- called 'on' so it can be test in the rules.
+
+	-- similarly, the machine connected as 'light' must have an 'on' state and an 'off' state
+	-- It may have other states of its own also but LightSwitch doesn't care about that.
+
+	-- It turns out that this simple way of connecting machines to each other this
+	-- way means a component (such as this LightSwitch) can be placed in a 
+	-- library and reused
+
+
+Controlling multiple things at once
+
+	###
+	LightController MACHINE lights {
+		COMMAND on  { SEND turnOn TO lights; }
+		COMMAND off { SEND turnOff TO lights; }
+	}
+
+	front_porch Light;
+	garden Light;
+	yard_lights LIST front_porch, garden;
+
+	controller LightController yard_lights;
+	###
+
+	-- this example shows how some lights can be built into a list and
+	-- that list can be connected to a controller machine
+
+	-- when a message is sent to a LIST, the message is actually
+	-- sent to all of the devices built into the LIST
+
 Tools
 	iod - main EtherCAT control daemon
 	cw - local interpreter daemon
@@ -250,7 +327,6 @@ Tools
 	###
 	-- sampler captures a stream of state and property changes
 	-- extermally effective debug tool
-
 
 User Interface Tools 
 	Web UI - basic web applicationfor monitoring and control
