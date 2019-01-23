@@ -1,6 +1,5 @@
 Clockwork Language
 	A look at the code
-	Mike O'Connor
 
 Language Features
 	Rule based
@@ -15,7 +14,7 @@ Language Features
 	-- It is highly parallel and since clockwork components
 	-- run continuously there is no need for loops
 
-	-- We fund that the components we build tend to be 
+	-- We find that the components we build tend to be 
 	-- easy to reuse.
 
 Defining states
@@ -29,8 +28,8 @@ Defining states
 	No automation
 	Controlled externally
 
-	-- this describes a machine that can be on or off, initially it is 
-	-- off. This machine does not have any automation, it has to be
+	-- this describes a machine that can be on or off, initially it is off
+	-- This machine does not have any automation, it has to be
 	-- controlled externally by directly setting its state.
 
 Using transitions
