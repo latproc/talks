@@ -1,28 +1,26 @@
 
 Application to FPGAs
 	Can do some high-level digital simulation
-	One day would like to program FPGAs
-
-	An example: 4-bit counter
-	<div style="float:right;" width:40%><img width=400px; src="img/binary_counter_2.png"></img></div>
-	### float:left; width:40%;
-
-	Pulser MACHINE {
-		OPTION delay 1000;
-		on WHEN TIMER > delay;
-		off DEFAULT;
-	}
-	TFF MACHINE in {
-		on STATE; off INITIAL;
-		RECEIVE in.off_enter { SEND next TO SELF; }
-		TRANSITION on TO off ON next;
-		TRANSITION off TO on ON next;
-	}
-	pulse Pulse;
-	one TFF pulse;
-	two TFF one;
-	three TFF two;
-	four TFF three;
+	One day we would like to program FPGAs
+	An example: 4-bit counter:
+	<div style="float:right;" width:45%><img width=400px; src="img/binary_counter_2.png"></img></div>
+	### float:left; width:45%; font-size:0.3em;
+Pulser MACHINE {
+	OPTION delay 1000;
+	on WHEN TIMER > delay;
+	off DEFAULT;
+}
+TFF MACHINE in {
+	on STATE; off INITIAL;
+	RECEIVE in.off_enter { SEND next TO SELF; }
+	TRANSITION on TO off ON next;
+	TRANSITION off TO on ON next;
+}
+pulse Pulse;
+one TFF pulse;
+two TFF one;
+three TFF two;
+four TFF three;
 	###
 	<div style="clear:both"></div>
 
@@ -30,7 +28,7 @@ Monitoring with Sampler
 	Using the 4-bit counter example
 	sampling to watch the flip flop changes
 	<div style="float:right;" width:40%><img width=400px; src="img/binary_truth.png"></img></div>
-	### float:left; width:40%;
+	### float:left; width:40%; font-size:0.2em;
 11150	one	off
 11152	two	off
 11156	three	off
@@ -50,5 +48,21 @@ Monitoring with Sampler
 16190	one	on
 	###
 
+
+Convert 4-bits to a number
+	Machines can be placed in a List
+	A List can interpret the on-off state of its members to create a BITSET
+	A BITSET can be interpreted as a number
+	BITSETS can be saved and loaded and used to initialise members of list to a known state.
+	###
+	res LIST four, three, two, one;
+Monitor MACHINE list {
+  OPTION VALUE 0;
+  update WHEN VALUE != BITSET FROM list;
+  idle DEFAULT;
+  ENTER update { WAIT 20; VALUE := BITSET FROM list; }
+}
+monitor Monitor res;
+	###
 
 

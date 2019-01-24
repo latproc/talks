@@ -1,0 +1,122 @@
+A comparison of programming styles
+	Programming blinking LEDs in C and Clockwork
+
+Blink a LED
+	<div style="float: left; width: 500px;">
+	### overflow: auto;
+int pin = 6;
+byte level = HIGH;
+void setup() {
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, level);
+}
+
+void loop() {
+  level = (level == LOW) ? HIGH : LOW;
+  digitalWrite(pin, level);
+  delay(500);
+}
+	###
+	</div>
+	<div style="float: left;  width: 450px; ">
+	### overflow: auto;
+Blink MACHINE pin {
+  on WHEN SELF IS off;
+  off DEFAULT;
+  ENTER on { 
+	SET pin TO on;
+	WAIT 500;
+  }
+  ENTER off { 
+	SET pin TO off;
+	WAIT 500;
+  }
+}
+cpu ESP32;
+led OUTPUT cpu, cpu.GPIO22; 
+blinker Blink led;
+
+	###
+	</div>
+	<div style="clear:both"></div>
+	A barebones example of code in C for Arduino and in Clockwork for ESP32
+
+	-- both of these examples could be shortened by hiding more details
+	-- away in libraries but we are trying to show how Clockwork
+	-- programming is a lot more like describing the machines than 
+	-- normal programming is. 	
+
+
+
+Blinking 3 LEDS at different rates
+	<div style="float: left; width: 800px; height:800px; overflow: scroll; zoom: 60%">
+	### font-size=4px; height:1200px; 
+typedef struct {
+  int pin;
+  unsigned long last_time;
+  byte level;
+  int wait_time;
+} Led;
+
+Led pins[] = {
+  {. pin = 6, .last_time = 0, .level = LOW, .wait_time = 500},
+  {. pin = 7, .last_time = 0, .level = LOW, .wait_time = 350},
+  {. pin = 8, .last_time = 0, .level = LOW, .wait_time = 650}
+};
+
+void setup() {
+  int i;
+  unsigned long now = millis();
+  for (i=0; i<3; ++i) {
+    pinMode(pins[i].pin, OUTPUT);
+    digitalWrite(pins[i].pin, pins[i].level);
+    pins[i].last_time = now;
+  }
+}
+
+void loop() {
+  int i;
+  unsigned long now = millis();
+  for (i=0; i<3; ++i) {
+    if (now - pins[i].last_time >= pins[i].wait_time) {
+      pins[i].last_time = now;
+      pins[i].level = (pins[i].level == LOW) ? HIGH : LOW;
+      digitalWrite(pins[i].pin, pins[i].level);
+    }
+  }
+}
+	###
+	</div>
+	<div style="float: right; width: 800px; height:460px; overflow: scroll; zoom: 60%">
+	### overflow: scroll;
+Blink MACHINE pin {
+  OPTION wait_time 500;
+  on WHEN SELF IS off;
+  off DEFAULT;
+  ENTER on { 
+	SET pin TO on;
+	WAIT wait_time;
+  }
+  ENTER off { 
+	SET pin TO off;
+	WAIT wait_time;
+  }
+}
+cpu ESP32;
+pin1 OUTPUT cpu, cpu.GPIO22; 
+pin2 OUTPUT cpu, cpu.GPIO23; 
+pin3 OUTPUT cpu, cpu.GPIO24; 
+blinker1 Blink(wait_time: 500) pin1;
+blinker2 Blink(wait_time: 350) pin2;
+blinker3 Blink(wait_time: 650) pin3;
+	###
+	</div>
+	<div style="float:right; width:400px;">
+	Not a big change in the requirements
+	Quite a lot of code changes in C
+	</div>
+	<div style="clear:both"></div>
+
+	-- Our objective with Clockwork is to make
+	-- it as simple to program by building
+	-- reusable models with code.
