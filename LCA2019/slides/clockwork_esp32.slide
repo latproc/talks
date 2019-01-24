@@ -1,0 +1,51 @@
+Embedding clockwork
+	Automatically translate user code to C
+	Provide a runtime framework
+	Limited set of features currently built
+	Intending to support Arduino (AVR ATmega) devices
+	Intending to supoprt other low power devices
+
+	-- We have had a fair bit of success embedding 
+	-- clockwork code into a small device.
+
+	-- This is still a work in progress so we 
+	-- have features for basic applications but
+	-- we are activelty trying to complete 
+	-- the feature set.
+
+Embedded feature set
+	Basic runtime working
+	No string processing
+	No floating point calculations
+	No iosh, debug is via mosquitto_pub/sub
+	Humid not yet supported
+
+	-- The embedded code currently can't do floating point
+	-- calculations or pattern matching with strings
+
+	-- We have only basic debugging and event logging via MQTT
+
+	-- Our humid graphical editor does not currently talk to MQTT
+
+
+Build process
+	<div style="float: left; width: 30%; height:500px; overflow: scroll;">
+	Command based
+	Work from clockwork source directory
+
+	###
+
+cd my-project
+build_esp32 [-f]
+
+	###
+	</div>
+	<div style="float:right;">
+	<img height=500px; src="img/esp32-parts.png" />
+	</div>
+
+	-- The build process takes a bit to install initially
+	-- but is not too bad once setup.
+	
+	-- The diagram shows how various code components are 
+	-- pulled together to produce the final image.

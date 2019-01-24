@@ -1,0 +1,30 @@
+Latproc Projects
+    clockwork - language and main toolset
+    ccope - an event sampler and terminal oscilloscope
+    humid - Human Interface Daemon
+    clockwork_esp32 - ESP32/FreeRTOS runtime
+
+Bugs and Issues
+    Not enough documentation
+    Numerous small issues 
+    Inter-clockwork channels needs more work
+        Shadowing machines
+        Startup issues when components restart
+    Some language features need clarification
+
+Future
+    We are continuing to develop and refine the language
+    Tools are developed as we need them
+    Will use the compiler technology on Linux
+    Lots of other ideas on the drawing board
+    We would like to help others use clockwork
+
+    -- Our tool set has been getting gradually more 
+    -- powerful and as we use clockwork
+    -- we find new areas that it seems to be applicable
+
+    -- So far we haven't been able to build a community
+    -- and so our development rate is pretty slow
+
+    -- The best way to improve the tools is to
+    -- use them and we are keen to help

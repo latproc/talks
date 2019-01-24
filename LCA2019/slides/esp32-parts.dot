@@ -1,0 +1,19 @@
+# to compile this: 
+#    dot -Tpng -o esp32-parts.png esp32-parts.dot
+#
+# move the png file to presentations/img
+
+digraph "build-process" {
+  "user-code" [shape=box];
+	"generated-C" [shape=box];
+  "clockwork-lib" [shape=box];
+	"esp32/FreeRTOS" [shape=box];
+  "object-code" [shape=box];
+  "clockwork-runtime" [shape=box];
+	"user-code" -> "cw --export_c" -> "generated-C";
+	"clockwork-lib" -> "cw --export_c";
+  "esp32/FreeRTOS" -> make -> "object-code" -> "make flash";
+  "generated-C" -> make;
+  "clockwork-runtime" -> make;
+}
+	
