@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Latproc - Language and Tools for Process Control</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Mike O'Connor">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/lca2019.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	<style>
+		/*********************************************
+			* ZOOM REVERSE TRANSITION (i.e. zoom out)
+			*********************************************/
+			.reveal .slides section[data-transition=zoomrev],
+			.reveal.zoomrev .slides section:not([data-transition]) {
+				transition-timing-function: ease;
+			}
+
+			.reveal .slides > section[data-transition=zoomrev].past,
+			.reveal .slides > section[data-transition~=zoomrev-out].past,
+			.reveal.zoomrev .slides > section:not([data-transition]).past {
+				       visibility: hidden;
+				-webkit-transform: scale(0.2);
+						transform: scale(0.2);
+			}
+
+			.reveal .slides > section[data-transition=zoomrev].future,
+			.reveal .slides > section[data-transition~=zoomrev-in].future,
+			.reveal.zoomrev .slides > section:not([data-transition]).future {
+					   visibility: hidden;
+				-webkit-transform: scale(16);
+						transform: scale(16);
+			}
+
+			.reveal .slides > section > section[data-transition=zoomrev].past,
+			.reveal .slides > section > section[data-transition~=zoomrev-out].past,
+			.reveal.zoomrev .slides > section > section:not([data-transition]).past {
+				-webkit-transform: translate(0, 150%);
+						transform: translate(0, 150%);
+			}
+
+			.reveal .slides > section > section[data-transition=zoomrev].future,
+			.reveal .slides > section > section[data-transition~=zoomrev-in].future,
+			.reveal.zoomrev .slides > section > section:not([data-transition]).future {
+				-webkit-transform: translate(0, -150%);
+						transform: translate(0, -150%);
+			}
+		</style>
+
+</head>
+
+<body>
+
+	<!-- Start of main presentation -->
+	<div class="reveal">
+		<div class="footer theme footer-green" id="lca-footer">
+				<div class="left-side">
+					<div><b>LINUX.CONF.AU</b></div>
+					<div><span>21-25 January 2019 | Christchurch | NZ</span></div>
+				</div>
+				<div class="right-side">
+					<div><b>The Linux of Things</b></div>
+					<div class="hashtag">#LCA2019</span><span class="twitter">@linuxconfau</span></div>
+				</div>
+				<div style="clear:both"></div>
+		</div>
+		<!-- include user data between here... -->
+<div class="slides">
+
+<section style="text-align: left;"  data-state="title-slide" data-background-image="css/theme/lca2019-title-bg-transparent.svg">
+	<h2>Application to FPGAs</h2>
+	<p>
+	Can do some high-level digital simulation
+	</p>
+	<p>
+	One day would like to program FPGAs
+	</p>
+<br/>
+	<p>
+	An example: 4-bit counter
+	</p>
+	<p>
+	<div style="float:right;" width:40%><img width=400px; src="img/binary_counter_2.png"></img></div>
+	</p>
+<div # float:left; width:40%;><pre><code>
+
+Pulser MACHINE {
+	OPTION delay 1000;
+	on WHEN TIMER > delay;
+	off DEFAULT;
+}
+TFF MACHINE in {
+	on STATE; off INITIAL;
+	RECEIVE in.off_enter { SEND next TO SELF; }
+	TRANSITION on TO off ON next;
+	TRANSITION off TO on ON next;
+}
+pulse Pulse;
+one TFF pulse;
+two TFF one;
+three TFF two;
+four TFF three;
+</code></pre></div>
+	<p>
+	<div style="clear:both"></div>
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Monitoring with Sampler</h2>
+	<p>
+	Using the 4-bit counter example
+	</p>
+	<p>
+	sampling to watch the flip flop changes
+	</p>
+	<p>
+	<div style="float:right;" width:40%><img width=400px; src="img/binary_truth.png"></img></div>
+	</p>
+<div # float:left; width:40%;><pre><code>
+1150	one	off
+1152	two	off
+1156	three	off
+1160	four	off
+1174	monitor.VALUE	value	0
+2159	one	on
+2188	monitor.VALUE	value	1
+3166	one	off
+3169	two	on
+3192	monitor.VALUE	value	2
+4172	one	on
+4198	monitor.VALUE	value	3
+5178	one	off
+5181	two	off
+5185	three	on
+5207	monitor.VALUE	value	4
+6190	one	on
+</code></pre></div>
+<br/>
+<br/>
+<br/>
+</section>
+</div>
+		<!-- ... and here -->
+		
+	</div> <!-- class="reveal" -->
+	<!-- End of main presentation -->
+
+	<!-- Start of configuration section -->
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		var presenter = !!Reveal.getQueryHash().s;
+
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: presenter ? false : true,
+			progress: true,
+			history: true,
+			center: false,
+			controlsTutorial: presenter ? false : true,
+
+			slideNumber: presenter ? null : 'c/t',
+
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions. Can be
+			// specified using percentage units.
+			width: 960,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+
+			multiplex: {
+				url: 'https://p.xobs.io/',
+				id: '631bb3db6fbaea78',
+				secret: Reveal.getQueryHash().s || null
+			},
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.02,
+			maxScale: 5.5,
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/search/search.js', async: true },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/notes/notes.js', async: true },
+
+				{ src: 'lib/js/socket.io.js', async: true },
+				{
+					src: presenter ?
+						'plugin/multiplex/master.js' :
+						'plugin/multiplex/client.js', async: true
+				},
+			]
+		});
+		Reveal.addEventListener( 'title-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-white");
+			footer.classList.add("footer-green");
+			document.body.style.background = "#387A3B"
+		} );
+		Reveal.addEventListener( 'normal-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-green");
+			footer.classList.add("footer-white");
+			document.body.style.background = "#fff"
+		} );
+
+	</script>
+</body>
+
+</html>

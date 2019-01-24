@@ -1,0 +1,54 @@
+
+Application to FPGAs
+	Can do some high-level digital simulation
+	One day would like to program FPGAs
+
+	An example: 4-bit counter
+	<div style="float:right;" width:40%><img width=400px; src="img/binary_counter_2.png"></img></div>
+	### float:left; width:40%;
+
+	Pulser MACHINE {
+		OPTION delay 1000;
+		on WHEN TIMER > delay;
+		off DEFAULT;
+	}
+	TFF MACHINE in {
+		on STATE; off INITIAL;
+		RECEIVE in.off_enter { SEND next TO SELF; }
+		TRANSITION on TO off ON next;
+		TRANSITION off TO on ON next;
+	}
+	pulse Pulse;
+	one TFF pulse;
+	two TFF one;
+	three TFF two;
+	four TFF three;
+	###
+	<div style="clear:both"></div>
+
+Monitoring with Sampler
+	Using the 4-bit counter example
+	sampling to watch the flip flop changes
+	<div style="float:right;" width:40%><img width=400px; src="img/binary_truth.png"></img></div>
+	### float:left; width:40%;
+11150	one	off
+11152	two	off
+11156	three	off
+11160	four	off
+11174	monitor.VALUE	value	0
+12159	one	on
+12188	monitor.VALUE	value	1
+13166	one	off
+13169	two	on
+13192	monitor.VALUE	value	2
+14172	one	on
+14198	monitor.VALUE	value	3
+15178	one	off
+15181	two	off
+15185	three	on
+15207	monitor.VALUE	value	4
+16190	one	on
+	###
+
+
+
