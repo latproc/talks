@@ -2,6 +2,17 @@ Clockwork
 	Clockwork and its tools
 		Open Source Software to make things more easily
 	Mike O'Connor
+
+Latproc Team
+
+	Mike O'Connor
+		the person with the know-how 
+		the person with the need
+
+	Martin Leadbeater
+		@mleadbeater
+		the helpful designer/programmer
+
 latproc 
 	Language And Tools for Process Control
 	-- TODO add image of bales on gravity feed from Ron spec document
@@ -30,11 +41,19 @@ Original Design Capabilities
 			- exec system
 		MQTT
 
-What it was develop for
-	<img src="img/MosesInfeedFrontRHV2.jpg">
+What it was developed for
+	<img height=900px src="img/MosesInfeedFrontRHV2.jpg">
 
-
-
+# example of embedding a local video in the browser
+#Video example 1
+#	<a href="/img/gnome.mp4">A gnome</a>
+#
+# example of embedding a youtube video
+#Video example
+#	<iframe width="560" height="315" src="https://www.youtube.com/embed/8H1GCQXfGUQ" 
+#	frameborder="0" allow="accelerometer; autoplay; 
+#	encrypted-media; gyroscope; picture-in-picture" 
+#	allowfullscreen></iframe>
 
 Clockwork
 	The latproc language
@@ -60,16 +79,20 @@ Language Features
 	-- We find that the components we build tend to be 
 	-- easy to reuse.
 
-Defining states
+Defining state machines
 	###
 	Light MACHINE {
 		on STATE;
 		off INITIAL;
 	}
+	light Light;
+
 	###
 	Simple machine
 	No automation
 	Controlled externally
+	'MACHINE' is a bit like a 'Class'
+	Instantiate a MACHINE to use it in a program
 
 	-- this describes a machine that can be on or off, initially it is off
 	-- This machine does not have any automation, it has to be
@@ -291,7 +314,7 @@ Tools
 	device connector - bridge to TCP/IP or serial devices
 Tools
 	iosh
-	###
+	### overflow:auto; height:100%; font-size:0.6em;
 > DESCRIBE O24V_GrabControlFan ;
 ---------------
 O24V_GrabControlFan: off  Class: POINT 
