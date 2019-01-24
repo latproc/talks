@@ -18,10 +18,19 @@ Latproc Projects
 	humid - Human Interface Daemon
 	clockwork_esp32 - ESP32/FreeRTOS runtime
 
+	-- clockwork - language and main toolset
+
+	-- scope - an event sampler and terminal oscilloscope
+
+	-- humid - Human Interface Daemon
+
+	-- clockwork_esp32 - ESP32/FreeRTOS runtime
+
 latproc 
 	Language And Tools for Process Control
 		First published 2012
-	-- latproc project is used for process control of hydraulic and pneumatic machinery.
+	-- LATPROC project is used for process control of hydraulic and pneumatic machinery.
+
 	-- Developed initially for Wooltech Wool Sampling machines
 		Linux Framework
 	-- Frameworks for Linux and FreeRTOS
@@ -33,6 +42,7 @@ Original Design Capabilities
 	Industrial IO (real world connections)
 		BeckHoff EtherCAT(tm) based control
 	-- Current able to interface to Ethercat Industrial Hardware
+
 	-- Very high speed update rates
 	Humid (Human Machine Interface)
 	-- Human Interface Device
@@ -121,6 +131,7 @@ Defining state machines
 	Instantiate a MACHINE to use it in a program
 
 	-- this describes a machine that can be on or off, initially it is off
+
 	-- This machine does not have any automation, it has to be
 	-- controlled externally by directly setting its state.
 
@@ -164,6 +175,14 @@ State Monitoring
 	State Machines are a common technique
 	State Machines focus on events and transitions
 	State Monitoring is about states and rules
+
+	-- Our name for this programming style
+
+	-- State Machines are a common technique
+
+	-- State Machines focus on events and transitions
+
+	-- State Monitoring is about states and rules
 
 Using rules
 
@@ -339,6 +358,8 @@ Controlling multiple things at once
 A comparison of programming styles
 	Programming blinking LEDs in C and Clockwork
 
+	Blinking LEDs the hello world of hardware
+
 Blink a LED
 	<div style="float: left; width: 500px;">
 	### overflow: auto;
@@ -383,8 +404,6 @@ blinker Blink led;
 	-- away in libraries but we are trying to show how Clockwork
 	-- programming is a lot more like describing the machines than 
 	-- normal programming is. 	
-
-
 
 Add more LEDS
 	<div style="float: left; width: 500px; height:400px; overflow: scroll; zoom: 50%">
