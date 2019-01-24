@@ -48,9 +48,9 @@ blinker Blink led;
 
 
 
-Blinking 3 LEDS at different rates
-	<div style="float: left; width: 800px; height:800px; overflow: scroll; zoom: 60%">
-	### font-size=4px; height:1200px; 
+Add more LEDS
+	<div style="float: left; width: 500px; height:400px; overflow: scroll; zoom: 50%">
+	###
 typedef struct {
   int pin;
   unsigned long last_time;
@@ -87,8 +87,8 @@ void loop() {
 }
 	###
 	</div>
-	<div style="float: right; width: 800px; height:460px; overflow: scroll; zoom: 60%">
-	### overflow: scroll;
+	<div style="float: right; width: 500px; height:400px; overflow: scroll; zoom: 50%;">
+	###
 Blink MACHINE pin {
   OPTION wait_time 500;
   on WHEN SELF IS off;
@@ -111,10 +111,9 @@ blinker2 Blink(wait_time: 350) pin2;
 blinker3 Blink(wait_time: 650) pin3;
 	###
 	</div>
-	<div style="float:right; width:400px;">
+
 	Not a big change in the requirements
 	Quite a lot of code changes in C
-	</div>
 	<div style="clear:both"></div>
 
 	-- Our objective with Clockwork is to make

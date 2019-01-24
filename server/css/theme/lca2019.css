@@ -22,7 +22,7 @@ section.has-light-background h6 {
 body {
     background: #387A3B;
     background-color: #387A3B;
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .reveal .lca-slide {
@@ -58,12 +58,13 @@ body {
     position: absolute;
     bottom: 0em;
     right: 2em;
+    zoom: 80%;
     
     font-size: 0.7em;
     width: 90%;
     left: 5em;
     background-repeat: no-repeat;
-    line-height: 1.3;
+    line-height: 1.2;
     /*display: flex;
     justify-content: flex-end;
     align-items: flex-end;*/
@@ -115,7 +116,7 @@ body {
 
 .reveal {
     font-family: "Space Mono", Helvetica, sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: normal;
     color: #fff;
 }
@@ -273,14 +274,14 @@ body {
 .reveal pre {
     display: block;
     position: relative;
-    width: 90%;
+    width: 95%;
     margin: 20px auto;
     text-align: left;
     font-size: 0.55em;
     font-family: monospace;
-    line-height: 1.1em;
+    line-height: 1.0em;
     word-wrap: break-word;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);*/
 }
 
 .reveal code {
