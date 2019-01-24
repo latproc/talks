@@ -14,15 +14,14 @@ Latproc Team
 
 latproc 
 	Language And Tools for Process Control
-	-- TODO add image of bales on gravity feed from Ron spec document
-
 		First published 2012
 	-- latproc project is used for process control of hydraulic and pneumatic machinery.
 	-- Developed initially for Wooltech Wool Sampling machines
-		Linux hosted
+		Linux Framework
+	-- Frameworks for Linux and FreeRTOS
+		FreeRTOS Framework (tested on ESP32)
 		Open Source under BSD and GPL
-		Developed a language which we call Clockwork
-	-- which we will talk about later
+	-- Release under BSD and GPL Licences
 
 Original Design Capabilities
 	Industrial IO (real world connections)
@@ -31,9 +30,12 @@ Original Design Capabilities
 	-- Very high speed updated rates
 	Humid (Human Machine Interface)
 	-- Human Interface Device
+	-- OpenGL bases
+	-- Text Readable config
 	Protocols
 	-- Number of protocols both industrial in nature and custom using TCP/IP and plugins
 		Modbus master/slave
+			- Modbus TCP/IP and RTU (Serial)
 		Raw TCP/IP and serial UART (device_connector)
 		Plugins
 			- libcurl
@@ -41,7 +43,8 @@ Original Design Capabilities
 		MQTT
 
 What it was developed for
-	<img height=900px src="img/MosesInfeedFrontRHV2.jpg">
+	<div style="width:80%;">
+	<img height=500px src="img/MosesInfeedFrontRHV2.jpg">
 
 # example of embedding a local video in the browser
 #Video example 1
@@ -49,14 +52,17 @@ What it was developed for
 #
 # example of embedding a youtube video
 #Video example
-#	<iframe width="560" height="315" src="https://www.youtube.com/embed/8H1GCQXfGUQ" 
-#	frameborder="0" allow="accelerometer; autoplay; 
-#	encrypted-media; gyroscope; picture-in-picture" 
-#	allowfullscreen></iframe>
+#  <iframe data-src="http://localhost:8000"></iframe>
+#  <video>
+#    <source data-src="/img/gnome.mp4" type="video/mp4" />
+#  </video>
+
+
+#	<iframe width="560" height="315" src="https://www.youtube.com/embed/KOCRodkhn7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Clockwork
 	The latproc language
-	Objects are called 'Machine's
+	Objects are called Machine's
 	Describe Machines by their states
 	States are selected by evaluating rules
 	All Machines run continuously in parallel
@@ -353,7 +359,7 @@ Tools
 	-- extermally effective debug tool
 
 User Interface Tools 
-	Web UI - basic web applicationfor monitoring and control
+	Web UI - basic web application for monitoring and control
 	humid - GUI development tool
 		Buttons (toggle, momentary)
 		Text and Number Entry Fields
