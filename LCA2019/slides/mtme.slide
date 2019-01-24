@@ -12,11 +12,31 @@ Latproc Team
 		@mleadbeater
 		the helpful designer/programmer
 
+	-- I'm Mike O'Connor, I have been involved in industrial
+	-- automation through my family business for all of my
+	-- working life.
+
+	-- I have been involved in a wide range of networking and
+	-- other project and consistenly turned to Linux and Open
+	-- Souce Software for my projects
+
+	-- Martin and I worked on a C++ based program for
+	-- one of our machines 20 years ago and we started
+	-- working together again around 2010 on an application 
+	-- monitoring system for embedded linux
+
+	-- Since 2012, Martin has been the main developer
+	-- of the tools we are talking about today.
+
 Latproc Projects
 	clockwork - language and main toolset
+	&nbsp;&nbsp;https://github.com/latproc/clockwork<br/>
 	scope - an event sampler and terminal oscilloscope
+	&nbsp;&nbsp;https://github.com/latproc/scope<br/>
 	humid - Human Interface Daemon
+	&nbsp;&nbsp;https://github.com/latproc/humid<br/>
 	clockwork_esp32 - ESP32/FreeRTOS runtime
+	&nbsp;&nbsp;https://github.com/latproc/clockwork_esp32
 
 	-- clockwork - language and main toolset
 
@@ -56,11 +76,10 @@ Original Design Capabilities
 		Plugins
 			- libcurl
 			- exec system
-		MQTT
+		MQTT - IoT protocol
 
 What it was developed for
-	<div style="width:80%;">
-	<img height=500px src="img/MosesInfeedFrontRHV2.jpg">
+	<div style="height:450px;"><img height=450px src="img/MosesInfeedFrontRHV2.jpg"></div>
 
 # example of embedding a local video in the browser
 #Video example 1
@@ -73,8 +92,6 @@ What it was developed for
 #    <source data-src="/img/gnome.mp4" type="video/mp4" />
 #  </video>
 
-
-#	<iframe width="560" height="315" src="https://www.youtube.com/embed/KOCRodkhn7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Clockwork
 	The latproc language
@@ -193,6 +210,7 @@ Using rules
 	}
 	###
 	Automatic state selection
+	Rules (WHEN statements) are continuously checked
 	Evaluates rules in sequence
 	Stops at the first rule that is true
 
@@ -222,8 +240,12 @@ Controlling things
 		ENTER on  { SET light TO on; }
 		ENTER off { SET light TO off; }
 	}
+
 	###
 	Controls 'light' based on the state of 'switch'
+	Rules (WHEN statements) are continuously checked
+	ENTER functions are processed when a state changes
+	The SET statement tells a machine to change state
 
 	-- When a machine changes state, it check to see if it has to do anything
 	-- by looking for an ENTER statement for the new state. 
@@ -242,12 +264,16 @@ No Loops or Ifs?
 	###
 	Counter MACHINE {
 		OPTION count 0;
-		up WHEN count < 10;
+
+		counting_up WHEN count < 10;
 		idle DEFAULT;
 
-		ENTER up { count := count + 1; }
+		ENTER counting_up { count := count + 1; }
 	}
+
 	###
+	This machine enters 'counting_up' whenever count < 10
+	When it enters 'counting_up' the machine adds one
 
 	-- There is no while statement, for statement or repeat statement in clockwork
 	-- everything is accomplished with state changes.
@@ -301,7 +327,10 @@ Counting up
 
 		ENTER up { count := count + 1; }
 	}
+
 	###
+	A nicer fix to the previous bug
+	Generally avoid using IF, use rules instead
 
 	-- this example fixes the bug in the previous example.
 
@@ -317,7 +346,11 @@ Reusing components
 		ENTER on  { SET light TO on; }
 		ENTER off { SET light TO off; }
 	}
+
 	###
+		Passing machines as parameters links them
+		switch and light are available to LightSwitch
+		LightSwitch can monitor the state or properties of linked machines
 
 	-- When machine are linked together, it is important to make
 	-- sure that they have the states and properties that are used in 
@@ -347,7 +380,10 @@ Controlling multiple things at once
 	yard_lights LIST front_porch, garden;
 
 	controller LightController yard_lights;
+
 	###
+	A LIST 'machine' can hold several other machines
+	When a message is sent to a LIST it is redirected to the members
 
 	-- this example shows how some lights can be built into a list and
 	-- that list can be connected to a controller machine
@@ -355,10 +391,28 @@ Controlling multiple things at once
 	-- when a message is sent to a LIST, the message is actually
 	-- sent to all of the devices built into the LIST
 
+Clockwork code real-world example
+	Wool bales being cored
+	<iframe width="700" height="393" src="https://www.youtube.com/embed/OPTpqycOI6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+	-- Controlling lights is just the beginning :)
+
+	-- Here is a video showing how it is used in industry
+
 A comparison of programming styles
 	Programming blinking LEDs in C and Clockwork
 
-	Blinking LEDs the hello world of hardware
+	Blinking LEDs - the hello world of hardware
+
+	Programming hardware starts easy but gets hard
+
+	-- Blinking LEDs is the hello world of hardware.
+
+	-- I'd like to show how easy it is to do that with C and with Clockwork
+
+	-- The problem is that programming gets harder quickly
+
+	-- We are trying to fight that issue, hopefully an example will help
 
 Blink a LED
 	<div style="float: left; width: 500px;">
@@ -400,10 +454,13 @@ blinker Blink led;
 	<div style="clear:both"></div>
 	A barebones example of code in C for Arduino and in Clockwork for ESP32
 
+	-- both programs have a fair bit of code just defining the
+	-- connection to the LEDS and preparing the hardware
+
 	-- both of these examples could be shortened by hiding more details
 	-- away in libraries but we are trying to show how Clockwork
 	-- programming is a lot more like describing the machines than 
-	-- normal programming is. 	
+	-- normal programming is.
 
 Add more LEDS
 	<div style="float: left; width: 500px; height:400px; overflow: scroll; zoom: 50%">
@@ -476,6 +533,29 @@ blinker3 Blink(wait_time: 650) pin3;
 	-- Our objective with Clockwork is to make
 	-- it as simple to program by building
 	-- reusable models with code.
+
+A nicer version 
+	We rarely use the WAIT statement
+	###
+Blink MACHINE pin {
+  OPTION wait_time 500;
+  on WHEN SELF IS off AND TIMER >= wait_time;
+  on WHEN SELF IS on AND TIMER <= wait_time;
+  off DEFAULT;
+  ENTER on  { SET pin TO on;  }
+  ENTER off { SET pin TO off; }
+}
+	###
+	Rules can be split so they can be expressed naturally
+	<q>If you've been off for 500ms or more, turn on</q>
+	<q>If you're on stay that way for 500ms</q> 
+	We like to keep the ENTER functions small
+
+	-- This version has two different reasons
+	-- for the LED to be on:
+
+	-- it might be off and have been that way for plenty of time
+	-- it might be on already but hasn't been on for very long so it stays on
 
 Tools
 	iod - main EtherCAT control daemon
@@ -557,10 +637,12 @@ User Interface Tools
 
 Embedding clockwork
 	Automatically translate user code to C
-	Provide a runtime framework
+	Provides a runtime framework
 	Limited set of features currently built
 	Intending to support Arduino (AVR ATmega) devices
 	Intending to support other low power devices
+	Working on better integration with our Linux based toolset
+
 
 	-- We have had a fair bit of success embedding 
 	-- clockwork code into a small device.
@@ -648,6 +730,15 @@ four TFF three;
 	###
 	<div style="clear:both"></div>
 
+	-- A Flip Flip is a device that holds itself in on state or another
+
+	-- A TFF flips state when it gets a pulse from an Inputs
+
+	--In this example we are passing the clock pulse into the first TFF
+
+	-- We pass the output of the first TFF into the second and so on
+
+
 Monitoring with Sampler
 	Using the 4-bit counter example
 	sampling to watch the flip flop changes
@@ -672,13 +763,22 @@ Monitoring with Sampler
 16190	one	on
 	###
 
+	-- Here is an example of monitoring with sampler
+
+	-- In this case we have used a filter to only show our flip flops and the result
+
+	-- Every state or property change appears in the log
+
+	-- the table on the right shows how the binary state of the flip flops 
+	-- translates to a numeric value.
+
 Convert 4-bits to a number
 	Machines can be placed in a List
 	A List can interpret the on-off state of its members to create a BITSET
 	A BITSET can be interpreted as a number
 	BITSETS can be saved and loaded and used to initialise members of list to a known state.
 	###
-	res LIST four, three, two, one;
+res LIST four, three, two, one;
 Monitor MACHINE list {
   OPTION VALUE 0;
   update WHEN VALUE != BITSET FROM list;
@@ -687,13 +787,15 @@ Monitor MACHINE list {
 }
 monitor Monitor res;
 	###
+	-- The 'monitor' in the previous example is a clockwork machine
+	-- that takes a list of inputs and uses BITSET to interpret the states as a value
 
 Future
 	We are continuing to develop and refine the language
 	Tools are developed as we need them
 	Will use the compiler technology on Linux
 	Lots of other ideas on the drawing board
-	We would like to help others use clockwork
+	We would like to help others use the tool set
 
 	-- Our tool set has been getting gradually more 
 	-- powerful and as we use clockwork
@@ -704,3 +806,20 @@ Future
 
 	-- The best way to improve the tools is to
 	-- use them and we are keen to help
+
+Questions or comments
+	clockwork - language and main toolset
+	&nbsp;&nbsp;https://github.com/latproc/clockwork<br/>
+	scope - an event sampler and terminal oscilloscope
+	&nbsp;&nbsp;https://github.com/latproc/scope<br/>
+	humid - Human Interface Daemon
+	&nbsp;&nbsp;https://github.com/latproc/humid<br/>
+	clockwork_esp32 - ESP32/FreeRTOS runtime
+	&nbsp;&nbsp;https://github.com/latproc/clockwork_esp32
+
+Questions or comments
+	Latproc - Language and Tools for Process Control
+		https://github.com/latproc
+
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/KOCRodkhn7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
