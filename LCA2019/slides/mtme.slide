@@ -789,6 +789,9 @@ monitor Monitor res;
 	###
 	-- The 'monitor' in the previous example is a clockwork machine
 	-- that takes a list of inputs and uses BITSET to interpret the states as a value
+	
+	-- the WAIT statement give time for the rippling of state changes to
+	-- stabilise before outputing the value.
 
 Future
 	We are continuing to develop and refine the language
