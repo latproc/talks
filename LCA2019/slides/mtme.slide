@@ -27,7 +27,7 @@ Original Design Capabilities
 	Industrial IO (real world connections)
 		BeckHoff EtherCAT(tm) based control
 	-- Current able to interface to Ethercat Industrial Hardware
-	-- Very high speed updated rates
+	-- Very high speed update rates
 	Humid (Human Machine Interface)
 	-- Human Interface Device
 	-- OpenGL bases
@@ -66,28 +66,22 @@ Clockwork
 	Describe Machines by their states
 	States are selected by evaluating rules
 	All Machines run continuously in parallel
-	Machines monitor each other
+	Machines monitor selves and each other
 
 	-- different programming style, more like modelling
 
 	-- we build code that describe what 
-	-- things to, for example: a door is open or closed or 
+	-- things do, for example: a door is open or closed or 
 	-- maybe opening or closing. 
 
 	-- a glass might be half full...
 
 	-- programming is more like connecting pieces together
 
-	-- we think about sequences but we think about changes
-	-- between states not steps from one action to another.
+	-- we think about sequences as changes between states
+	-- not steps from one action to another.
 
-State Monitoring
-	Our name for this programming style
-	State Machines are a common technique
-	State Machines focus on events and transitions
-	State Monitoring is about states and rules
-
-
+	-- Generally our actions in a state a very small
 
 Language Features
 	Rule based
@@ -95,8 +89,8 @@ Language Features
 	No Loop statements
 	Highly reusable code
 
-	-- There are a few key features that distinguish our 
-	-- clockwork language. It uses rules to automatically
+	-- Key features that distinguish our clockwork language
+	-- It uses rules to automatically
 	-- decide what state parts of a system are in.
 
 	-- It is highly parallel and since clockwork components
@@ -158,6 +152,12 @@ Situation Normal
 
 	-- Clockwork is not like this and actually we rarely use the
 	-- TRANSITION statement.
+
+State Monitoring
+	Our name for this programming style
+	State Machines are a common technique
+	State Machines focus on events and transitions
+	State Monitoring is about states and rules
 
 Using rules
 
