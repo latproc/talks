@@ -81,6 +81,9 @@ Original Design Capabilities
 What it was developed for
 	<div style="height:450px;"><img height=450px src="img/MosesInfeedFrontRHV2.jpg"></div>
 
+What it was developed for
+	<div style="height:450px;"><img height=450px src="img/down_the_middle.jpg"></div>
+
 # example of embedding a local video in the browser
 #Video example 1
 #	<a href="/img/gnome.mp4">A gnome</a>
