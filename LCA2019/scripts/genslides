@@ -80,7 +80,7 @@ cat $slidefiles \
 					$2 = ""
 				} else {
 					if (inaside==0) printf "\t<aside class=\"notes\">\n"
-					printf "\t\t%s\n",substr($2,1,10000); 
+					printf "\t\t%s\n",substr($2,3,10000); 
 					inaside=NR
 				}
 			}
