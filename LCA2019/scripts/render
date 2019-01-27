@@ -34,12 +34,6 @@ if [ $? != 0 ]; then
    esac
 done
 #
-#
-# insert your code here
-#echo listfile=$listfile
-#echo output=$output
-
-#trap 'mv /tmp/genslides.$$ /tmp/a' 0 1 2 15
 trap 'rm -f /tmp/genslides.$$' 0 1 2 15
 
 # render some slides to create a presentation

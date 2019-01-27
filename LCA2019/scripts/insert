@@ -22,7 +22,9 @@ if [ ! -f "$snippet" ]; then
 	exit 1
 fi
 
-cp "$master" "$master".bak || exit 3
+if [ -r "$master" ]; then
+  cp "$master" "$master".bak || exit 3
+fi
 
 cat "$master" | awk -v marker="$START_MARK" '
 	seen != 1 {print}
