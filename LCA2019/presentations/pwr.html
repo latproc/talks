@@ -108,17 +108,8 @@
 	</p>
 	<aside class="notes">
 		 TODO add image of bales on gravity feed from Ron spec document
+<br/>
 </aside>
-	<p>
-	<div style="float:right; width:50%;">
-	</p>
-	<p>
-	<img src="img/HumidScreen.jpg">
-	</p>
-	<p>
-	</div>
-	</p>
-
 	<ul>
 	<li>		First published 2012</li>
 	
@@ -185,6 +176,13 @@
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Going Back</h2>
 	<p>
+	<img src="img/MosesInfeedFrontRHV2.jpg">
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Going Back</h2>
+	<p>
 	Wooltech - 40 years of automation
 	</p>
 	<p>
@@ -205,7 +203,7 @@
 	<p>
 	Back to Koyo PLCs during the 2000s using newer models
 	</p>
-
+<br/>
 	<aside class="notes">
 		 Wooltech has 40 years of develop machines that needed control
 		 From electrical time and relay logic, to a Scorpion board
@@ -220,9 +218,22 @@
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Issues we Experienced</h2>
 	<p>
+	<div style="width:50%;">
+	</p>
+	<p>
+	<img src="img/WTL1.0-inplace.jpg">
+	</p>
+	<p>
+	</dev>
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Issues we Experienced</h2>
+	<p>
 	Long term custom hardware support is hard
 	</p>
-
+<br/>
 	<p>
 	Commerical solutions use binary file formats for source config
 	</p>
@@ -273,7 +284,7 @@
 	
 	<li>		We went back to PLCs</li>
 	
-
+<br/>
 	<aside class="notes">
 		 At first when we moved towards using a Linux-based control
 		 system we had some software developed in C++ along with a custom
@@ -304,7 +315,7 @@
 	<p>
 	Version control all source code
 	</p>
-
+<br/>
 	<aside class="notes">
 		 Wooltech found the control development risks for 
 		 new/refurbished sampling lines became 
@@ -337,21 +348,21 @@
 	<p>
 	A Machines state resemble physical states and behaviour
 	</p>
+<br/>
+<div ><pre><code> 
+        LightSwitch MACHINE switch, light {
+                on WHEN switch IS on;
+                off DEFAULT;
 
-<pre><code>
-       LightSwitch MACHINE switch, light {
-               on WHEN switch IS on;
-               off DEFAULT;
-
-               ENTER on  { SET light TO on; }
-               ENTER off { SET light TO off; }
-       }
-</code></pre>
+                ENTER on  { SET light TO on; }
+                ENTER off { SET light TO off; }
+        }
+</code></pre></div>
 	<p>
 	Controls 'light' based on the state of 'switch'
 	</p>
-
-
+<br/>
+<br/>
 	<aside class="notes">
 		 The design is based on what we have learnt
 		 programming using state machines and PLCs over many years
@@ -385,7 +396,7 @@
 	<p>
 	By reusing what we have done before
 	</p>
-
+<br/>
 	<aside class="notes">
 		 We understand our machinery better than other people and we
 		 understand the most effective way it should be used. 
@@ -413,8 +424,8 @@
 	<p>
 	Use Open Source Software
 	</p>
-
-
+<br/>
+<br/>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Version Control everything</h2>
@@ -427,7 +438,7 @@
 	<p>
 	Proprietary, windows-based programming tools do not maintain support for all versions 
 	</p>
-
+<br/>
 	<aside class="notes">
 		 Building machinery over an extended period of time leads to situations where
 		 some sites have one version of a PLC programming tool and others have a different version
@@ -505,46 +516,46 @@
 	<p>
 	iosh
 	</p>
-<pre><code>
- DESCRIBE O24V_GrabControlFan ;
---------------
-24V_GrabControlFan: off  Class: POINT 
-instantiated at: /opt/latproc/code/config/config.lpc line:94
- parameter 1 module (EL2828_01), state: OP
- parameter 2 1 ()
+<div ><pre><code> 
+> DESCRIBE O24V_GrabControlFan ;
+---------------
+O24V_GrabControlFan: off  Class: POINT 
+ instantiated at: /opt/latproc/code/config/config.lpc line:94
+  parameter 1 module (EL2828_01), state: OP
+  parameter 2 1 ()
 
-io: readtime: 185932 [Channel 2 Output, 1 0:1.1]=0 (0)
-xports:
- O24V_GrabControlFan
- published (1)
-istening to: 
- EL2828_01[123]:   OP
+ io: readtime: 185932 [Channel 2 Output, 1 0:1.1]=0 (0)
+Exports:
+  O24V_GrabControlFan
+  published (1)
+Listening to: 
+  EL2828_01[123]:   OP
 
-ependant machines: 
- L_Inputs[399]:   nonempty
- M_ControlFan[580]:   off
+Dependant machines: 
+  L_Inputs[399]:   nonempty
+  M_ControlFan[580]:   off
 
-roperties:
- NAME:O24V_GrabControlFan, STATE:off, export:0, tab:Outputs, type:Output, wire:Y52
+properties:
+  NAME:O24V_GrabControlFan, STATE:off, export:0, tab:Outputs, type:Output, wire:Y52
 
-imer: 20713486
+Timer: 20713486
 
-
-</code></pre>
-
+>
+</code></pre></div>
+<br/>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Tools</h2>
 	<p>
 	sampler
 	</p>
-<pre><code>
-43391 M_CO2 idle
-43891 M_CO2 update
-43892 XA_CO2 CO2_Level 496
-43892 XA_CO2 message 496
-43892 M_CO2 idle
-</code></pre>
+<div ><pre><code> 
+443391 M_CO2 idle
+443891 M_CO2 update
+443892 XA_CO2 CO2_Level 496
+443892 XA_CO2 message 496
+443892 M_CO2 idle
+</code></pre></div>
 	<aside class="notes">
 		 sampler captures a stream of state and property changes
 		 extermally effective debug tool
@@ -578,7 +589,7 @@ imer: 20713486
 	<p>
 	scope - character based graphing for sampler 
 	</p>
-
+<br/>
 	<aside class="notes">
 		 The original user interface we a basic web page that 
 		 displayed the status of the IO on separate tabs, 
@@ -615,7 +626,7 @@ imer: 20713486
 	<p>
 	etc.,
 	</p>
-
+<br/>
 	<aside class="notes">
 		 these are some of the Open Source tools we use within the latproc tool set
 </section>
@@ -637,7 +648,7 @@ imer: 20713486
 			controls: presenter ? false : true,
 			progress: true,
 			history: true,
-			center: true,
+			center: false,
 			controlsTutorial: presenter ? false : true,
 
 			slideNumber: presenter ? null : 'c/t',
@@ -645,7 +656,7 @@ imer: 20713486
 			// The "normal" size of the presentation, aspect ratio will be preserved
 			// when the presentation is scaled to fit different resolutions. Can be
 			// specified using percentage units.
-			width: 960,
+			width: 1050,
 			height: 700,
 
 			// Factor of the display size that should remain empty around the content

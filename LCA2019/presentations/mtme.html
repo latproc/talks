@@ -1,0 +1,1490 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Latproc - Language and Tools for Process Control</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Mike O'Connor">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/lca2019.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+	<style>
+		/*********************************************
+			* ZOOM REVERSE TRANSITION (i.e. zoom out)
+			*********************************************/
+			.reveal .slides section[data-transition=zoomrev],
+			.reveal.zoomrev .slides section:not([data-transition]) {
+				transition-timing-function: ease;
+			}
+
+			.reveal .slides > section[data-transition=zoomrev].past,
+			.reveal .slides > section[data-transition~=zoomrev-out].past,
+			.reveal.zoomrev .slides > section:not([data-transition]).past {
+				       visibility: hidden;
+				-webkit-transform: scale(0.2);
+						transform: scale(0.2);
+			}
+
+			.reveal .slides > section[data-transition=zoomrev].future,
+			.reveal .slides > section[data-transition~=zoomrev-in].future,
+			.reveal.zoomrev .slides > section:not([data-transition]).future {
+					   visibility: hidden;
+				-webkit-transform: scale(16);
+						transform: scale(16);
+			}
+
+			.reveal .slides > section > section[data-transition=zoomrev].past,
+			.reveal .slides > section > section[data-transition~=zoomrev-out].past,
+			.reveal.zoomrev .slides > section > section:not([data-transition]).past {
+				-webkit-transform: translate(0, 150%);
+						transform: translate(0, 150%);
+			}
+
+			.reveal .slides > section > section[data-transition=zoomrev].future,
+			.reveal .slides > section > section[data-transition~=zoomrev-in].future,
+			.reveal.zoomrev .slides > section > section:not([data-transition]).future {
+				-webkit-transform: translate(0, -150%);
+						transform: translate(0, -150%);
+			}
+		</style>
+
+</head>
+
+<body>
+
+	<!-- Start of main presentation -->
+	<div class="reveal">
+		<div class="footer theme footer-green" id="lca-footer">
+				<div class="left-side">
+					<div><b>LINUX.CONF.AU</b></div>
+					<div><span>21-25 January 2019 | Christchurch | NZ</span></div>
+				</div>
+				<div class="right-side">
+					<div><b>The Linux of Things</b></div>
+					<div class="hashtag">#LCA2019</span><span class="twitter">@linuxconfau</span></div>
+				</div>
+				<div style="clear:both"></div>
+		</div>
+		<!-- include user data between here... -->
+<div class="slides">
+<section style="text-align: left;"  data-state="title-slide" data-background-image="css/theme/lca2019-title-bg-transparent.svg">
+	<h2>Clockwork</h2>
+	<p>
+	Clockwork And Its Tools - Open Source Software to make things more easily
+	</p>
+	<p>
+	Mike O'Connor
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Latproc Team</h2>
+<br/>
+	<p>
+	Mike O'Connor
+	</p>
+	<ul>
+	<li>		the person with the know-how </li>
+	
+	<li>		the person with the need</li>
+	
+<br/>
+	</ul>
+	<p>
+	Martin Leadbeater
+	</p>
+	<ul>
+	<li>		@mleadbeater</li>
+	
+	<li>		the helpful designer/programmer</li>
+	
+<br/>
+	<aside class="notes">
+		 I'm Mike O'Connor, I have been involved in industrial
+		 automation through my family business for all of my
+		 working life.
+<br/>
+		 I have been involved in a wide range of networking and
+		 other project and consistenly turned to Linux and Open
+		 Souce Software for my projects
+<br/>
+		 Martin and I worked on a C++ based program for
+		 one of our machines 20 years ago and we started
+		 working together again around 2010 on an application 
+		 monitoring system for embedded linux
+<br/>
+		 Since 2012, Martin has been the main developer
+		 of the tools we are talking about today.
+<br/>
+	</ul>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Latproc Projects</h2>
+	<p>
+	clockwork - language and main toolset
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/clockwork<br/>
+	</p>
+	<p>
+	scope - an event sampler and terminal oscilloscope
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/scope<br/>
+	</p>
+	<p>
+	humid - Human Interface Daemon
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/humid<br/>
+	</p>
+	<p>
+	clockwork_esp32 - ESP32/FreeRTOS runtime
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/clockwork_esp32
+	</p>
+<br/>
+	<aside class="notes">
+		 clockwork - language and main toolset
+<br/>
+		 scope - an event sampler and terminal oscilloscope
+<br/>
+		 humid - Human Interface Daemon
+<br/>
+		 clockwork_esp32 - ESP32/FreeRTOS runtime
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>latproc </h2>
+	<p>
+	Language And Tools for Process Control
+	</p>
+	<ul>
+	<li>		First published 2012</li>
+	
+	<aside class="notes">
+		 LATPROC project is used for process control of hydraulic and pneumatic machinery.
+<br/>
+		 Developed initially for Wooltech Wool Sampling machines
+</aside>
+	<li>		Linux Framework</li>
+	
+	<aside class="notes">
+		 Frameworks for Linux and FreeRTOS
+</aside>
+	<li>		FreeRTOS Framework (tested on ESP32)</li>
+	
+	<li>		Open Source under BSD and GPL</li>
+	
+	<aside class="notes">
+		 Release under BSD and GPL Licences
+<br/>
+	</ul>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Original Design Capabilities</h2>
+	<p>
+	Industrial IO (real world connections)
+	</p>
+	<ul>
+	<li>		BeckHoff EtherCAT(tm) based control</li>
+	
+	<aside class="notes">
+		 Current able to interface to Ethercat Industrial Hardware
+<br/>
+		 Very high speed update rates
+</aside>
+	</ul>
+	<p>
+	Humid (Human Machine Interface)
+	</p>
+	<aside class="notes">
+		 Human Interface Device
+		 OpenGL bases
+		 Text Readable config
+</aside>
+	<p>
+	Protocols
+	</p>
+	<aside class="notes">
+		 Number of protocols both industrial in nature and custom using TCP/IP and plugins
+</aside>
+	<ul>
+	<li>		Modbus master/slave</li>
+	
+	<li>			- Modbus TCP/IP and RTU (Serial)</li>
+	
+	<li>		Raw TCP/IP and serial UART (device_connector)</li>
+	
+	<li>		Plugins</li>
+	
+	<li>			- libcurl</li>
+	
+	<li>			- exec system</li>
+	
+	<li>		MQTT - IoT protocol</li>
+	
+<br/>
+	</ul>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>What it was developed for</h2>
+	<p>
+	<div style="height:450px;"><img height=450px src="img/MosesInfeedFrontRHV2.jpg"></div>
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>What it was developed for</h2>
+	<p>
+	<div style="height:450px;"><img height=450px src="img/down_the_middle.jpg"></div>
+	</p>
+<br/>
+<br/>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Clockwork</h2>
+	<p>
+	The latproc language
+	</p>
+	<p>
+	Objects are called Machine's
+	</p>
+	<p>
+	Describe Machines by their states
+	</p>
+	<p>
+	States are selected by evaluating rules
+	</p>
+	<p>
+	All Machines run continuously in parallel
+	</p>
+	<p>
+	Machines monitor selves and each other
+	</p>
+<br/>
+	<aside class="notes">
+		 different programming style, more like modelling
+<br/>
+		 we build code that describe what 
+		 things do, for example: a door is open or closed or 
+		 maybe opening or closing. 
+<br/>
+		 a glass might be half full...
+<br/>
+		 programming is more like connecting pieces together
+<br/>
+		 we think about sequences as changes between states
+		 not steps from one action to another.
+<br/>
+		 Generally our actions in a state a very small
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Language Features</h2>
+	<p>
+	Rule based
+	</p>
+	<p>
+	Automatic state selection
+	</p>
+	<p>
+	No Loop statements
+	</p>
+	<p>
+	Highly reusable code
+	</p>
+<br/>
+	<aside class="notes">
+		 Key features that distinguish our clockwork language
+		 It uses rules to automatically
+		 decide what state parts of a system are in.
+<br/>
+		 It is highly parallel and since clockwork components
+		 run continuously there is no need for loops
+<br/>
+		 We find that the components we build tend to be 
+		 easy to reuse.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Defining state machines</h2>
+<div ><pre><code> 
+	Light MACHINE {
+		on STATE;
+		off INITIAL;
+	}
+	light Light;
+
+</code></pre></div>
+	<p>
+	Simple machine
+	</p>
+	<p>
+	No automation
+	</p>
+	<p>
+	Controlled externally
+	</p>
+	<p>
+	'MACHINE' is a bit like a 'Class'
+	</p>
+	<p>
+	Instantiate a MACHINE to use it in a program
+	</p>
+<br/>
+	<aside class="notes">
+		 this describes a machine that can be on or off, initially it is off
+<br/>
+		 This machine does not have any automation, it has to be
+		 controlled externally by directly setting its state.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Using transitions</h2>
+<br/>
+<div ><pre><code> 
+	ToggleSwitch MACHINE {
+		on STATE;
+		off INITIAL;
+
+		TRANSITION on TO off USING next;
+		TRANSITION off TO on USING next;
+	}
+</code></pre></div>
+	<p>
+	Basic automation via transitions
+	</p>
+	<p>
+	Flips state when 'next' message is received
+	</p>
+<br/>
+	<aside class="notes">
+		 this dscribes a machine that can receive a message called: 'next'
+<br/>
+		 if this machine receives the message, when it is on, it turns off.
+		 Similarly, if it was off when the message arrives, it turns on.
+<br/>
+		 repeatedly sending the next message will cause the machine to
+		 toggle between on and off
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Situation Normal</h2>
+	<p>
+	MACHINEs can have STATEs
+	</p>
+	<p>
+	TRANSITIONS can cause STATEs to change
+	</p>
+	<p>
+	Nothing special so far...
+	</p>
+<br/>
+	<aside class="notes">
+		 this is all very common and is what all state-based programming
+		 is like. Essentially, transitions are used to respond to 
+		 events and programming using state machines is all about 
+		 sending and responding to events.
+<br/>
+		 Clockwork is not like this and actually we rarely use the
+		 TRANSITION statement.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>State Monitoring</h2>
+	<p>
+	Our name for this programming style
+	</p>
+	<p>
+	State Machines are a common technique
+	</p>
+	<p>
+	State Machines focus on events and transitions
+	</p>
+	<p>
+	State Monitoring is about states and rules
+	</p>
+<br/>
+	<aside class="notes">
+		 Our name for this programming style
+<br/>
+		 State Machines are a common technique
+<br/>
+		 State Machines focus on events and transitions
+<br/>
+		 State Monitoring is about states and rules
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Using rules</h2>
+<br/>
+<div ><pre><code> 
+	Blinker MACHINE {
+		on WHEN SELF IS off;
+		off DEFAULT;
+	}
+</code></pre></div>
+	<p>
+	Automatic state selection
+	</p>
+	<p>
+	Rules (WHEN statements) are continuously checked
+	</p>
+	<p>
+	Evaluates rules in sequence
+	</p>
+	<p>
+	Stops at the first rule that is true
+	</p>
+<br/>
+	<aside class="notes">
+		 here is a machine that has two states, 'on' and 'off'
+<br/>
+		 the 'on' state has a rule given by the WHEN clause
+<br/>
+		 the machine continuously evaluates its rules and none of them
+		 match (that is, if none of them evaluate as 'TRUE') then
+		 the machine sets itself into the DEFAULT state.
+<br/>
+		 Looking at the rule on this machine, we see that whenever
+		 the machine is 'off', the rule for the 'on' state is TRUE
+		 so the machine turns on. 
+<br/>
+		 If the machine is on, the rule 'SELF IS off' is no longer true so
+		 the machine cannot stay in the 'on' state. Since there are
+		 no other states, the machine goes to 'off'
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Controlling things</h2>
+<br/>
+<div ><pre><code> 
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
+
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+
+</code></pre></div>
+	<p>
+	Controls 'light' based on the state of 'switch'
+	</p>
+	<p>
+	Rules (WHEN statements) are continuously checked
+	</p>
+	<p>
+	ENTER functions are processed when a state changes
+	</p>
+	<p>
+	The SET statement tells a machine to change state
+	</p>
+<br/>
+	<aside class="notes">
+		 When a machine changes state, it check to see if it has to do anything
+		 by looking for an ENTER statement for the new state. 
+<br/>
+		 In this example, we are controlling a light using about
+		 switch.
+<br/>
+		 When the switch is turned on, this controller turns the light on.
+<br/>
+		 In clockwork, the switch and the light could be other software 'MACHINE's or
+		 they could represent hardware devices, such as switches, beams or proximity sensors
+		 They might even represent the value of a topic in an IoT device.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>No Loops or Ifs?</h2>
+<br/>
+<div ><pre><code> 
+	Counter MACHINE {
+		OPTION count 0;
+
+		counting_up WHEN count < 10;
+		idle DEFAULT;
+
+		ENTER counting_up { count := count + 1; }
+	}
+
+</code></pre></div>
+	<p>
+	This machine enters 'counting_up' whenever count < 10
+	</p>
+	<p>
+	When it enters 'counting_up' the machine adds one
+	</p>
+<br/>
+	<aside class="notes">
+		 There is no while statement, for statement or repeat statement in clockwork
+		 everything is accomplished with state changes.
+<br/>
+		 In this example, we show a machine that counts up to 10 without a loops
+<br/>
+		 Actually this example has a bug. When the machine starts its count property is set to zero.
+		 The rules are checked and 'count < 10' is true so the machine enters the 'up' state
+<br/>
+		 When the machine enters the up state, it adds one to count.
+<br/>
+		 Next time the rules are evaluated, count is still < 10 to the machine stays
+		 in the 'up' state.
+<br/>
+		 Since it has already entered the 'up' state, the machine does not execute the
+		 ENTER function for 'up' so the machine is stable and sits in the 'up' 
+		 state forever.
+<br/>
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>No If statements?</h2>
+<br/>
+<div ><pre><code> 
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN count < 10;
+		idle DEFAULT;
+
+		ENTER up { 
+			count := count + 1;
+			IF count < 10 { SET SELF TO idle; }
+		}
+	}
+</code></pre></div>
+<br/>
+	<p>
+	An ugly fix to the error in the rules
+	</p>
+<br/>
+	<aside class="notes">
+		 actually, clockwork has if statements but we almost never use them
+<br/>
+		 this example fixes the previous bug using an IF statement.
+<br/>
+		 usually if we think we need to use an if statement, we haven'that
+		 got the rules right.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Counting up</h2>
+<br/>
+<div ><pre><code> 
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN SELF IS idle AND count < 10;
+		idle DEFAULT;
+
+		ENTER up { count := count + 1; }
+	}
+
+</code></pre></div>
+	<p>
+	A nicer fix to the previous bug
+	</p>
+	<p>
+	Generally avoid using IF, use rules instead
+	</p>
+<br/>
+	<aside class="notes">
+		 this example fixes the bug in the previous example.
+<br/>
+		 note that it is a lot cleaner and doesn't need an if statement
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Reusing components</h2>
+<br/>
+<div ><pre><code> 
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
+
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+
+</code></pre></div>
+	<ul>
+	<li>		Passing machines as parameters links them</li>
+	
+	<li>		switch and light are available to LightSwitch</li>
+	
+	<li>		LightSwitch can monitor the state or properties of linked machines</li>
+	
+<br/>
+	<aside class="notes">
+		 When machine are linked together, it is important to make
+		 sure that they have the states and properties that are used in 
+		 all of the rules and ENTER functions
+<br/>
+		 for example, the machine passed to the LightSwitch must have a state 
+		 called 'on' so it can be test in the rules.
+<br/>
+		 similarly, the machine connected as 'light' must have an 'on' state and an 'off' state
+		 It may have other states of its own also but LightSwitch doesn't care about that.
+<br/>
+		 It turns out that this simple way of connecting machines to each other this
+		 way means a component (such as this LightSwitch) can be placed in a 
+		 library and reused
+<br/>
+<br/>
+	</ul>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Controlling multiple things at once</h2>
+<br/>
+<div ><pre><code> 
+	LightController MACHINE lights {
+		COMMAND on  { SEND turnOn TO lights; }
+		COMMAND off { SEND turnOff TO lights; }
+	}
+
+	front_porch Light;
+	garden Light;
+	yard_lights LIST front_porch, garden;
+
+	controller LightController yard_lights;
+
+</code></pre></div>
+	<p>
+	A LIST 'machine' can hold several other machines
+	</p>
+	<p>
+	When a message is sent to a LIST it is redirected to the members
+	</p>
+<br/>
+	<aside class="notes">
+		 this example shows how some lights can be built into a list and
+		 that list can be connected to a controller machine
+<br/>
+		 when a message is sent to a LIST, the message is actually
+		 sent to all of the devices built into the LIST
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Clockwork code real-world example</h2>
+	<p>
+	Wool bales being cored
+	</p>
+	<p>
+	<iframe width="700" height="393" src="https://www.youtube.com/embed/OPTpqycOI6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</p>
+<br/>
+	<aside class="notes">
+		 Controlling lights is just the beginning :)
+<br/>
+		 Here is a video showing how it is used in industry
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>A comparison of programming styles</h2>
+	<p>
+	Programming blinking LEDs in C and Clockwork
+	</p>
+<br/>
+	<p>
+	Blinking LEDs - the hello world of hardware
+	</p>
+<br/>
+	<p>
+	Programming hardware starts easy but gets hard
+	</p>
+<br/>
+	<aside class="notes">
+		 Blinking LEDs is the hello world of hardware.
+<br/>
+		 I'd like to show how easy it is to do that with C and with Clockwork
+<br/>
+		 The problem is that programming gets harder quickly
+<br/>
+		 We are trying to fight that issue, hopefully an example will help
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Blink a LED</h2>
+	<p>
+	<div style="float: left; width: 500px;">
+	</p>
+<div  overflow: auto;><pre><code> 
+int pin = 6;
+byte level = HIGH;
+void setup() {
+  pinMode(pin, OUTPUT);
+  digitalWrite(pin, level);
+}
+
+void loop() {
+  level = (level == LOW) ? HIGH : LOW;
+  digitalWrite(pin, level);
+  delay(500);
+}
+</code></pre></div>
+	<p>
+	</div>
+	</p>
+	<p>
+	<div style="float: left;  width: 450px; ">
+	</p>
+<div  overflow: auto;><pre><code> 
+Blink MACHINE pin {
+  on WHEN SELF IS off;
+  off DEFAULT;
+  ENTER on { 
+	SET pin TO on;
+	WAIT 500;
+  }
+  ENTER off { 
+	SET pin TO off;
+	WAIT 500;
+  }
+}
+cpu ESP32;
+led OUTPUT cpu, cpu.GPIO22; 
+blinker Blink led;
+
+</code></pre></div>
+	<p>
+	</div>
+	</p>
+	<p>
+	<div style="clear:both"></div>
+	</p>
+	<p>
+	A barebones example of code in C for Arduino and in Clockwork for ESP32
+	</p>
+<br/>
+	<aside class="notes">
+		 both programs have a fair bit of code just defining the
+		 connection to the LEDS and preparing the hardware
+<br/>
+		 both of these examples could be shortened by hiding more details
+		 away in libraries but we are trying to show how Clockwork
+		 programming is a lot more like describing the machines than 
+		 normal programming is.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Add more LEDS</h2>
+	<p>
+	<div style="float: left; width: 45%; height:400px; overflow: scroll; zoom: 50%">
+	</p>
+<div ><pre><code> 
+typedef struct {
+  int pin;
+  unsigned long last_time;
+  byte level;
+  int wait_time;
+} Led;
+
+Led pins[] = {
+  {. pin = 6, .last_time = 0, .level = LOW, .wait_time = 500},
+  {. pin = 7, .last_time = 0, .level = LOW, .wait_time = 350},
+  {. pin = 8, .last_time = 0, .level = LOW, .wait_time = 650}
+};
+
+void setup() {
+  int i;
+  unsigned long now = millis();
+  for (i=0; i<3; ++i) {
+    pinMode(pins[i].pin, OUTPUT);
+    digitalWrite(pins[i].pin, pins[i].level);
+    pins[i].last_time = now;
+  }
+}
+
+void loop() {
+  int i;
+  unsigned long now = millis();
+  for (i=0; i<3; ++i) {
+    if (now - pins[i].last_time >= pins[i].wait_time) {
+      pins[i].last_time = now;
+      pins[i].level = (pins[i].level == LOW) ? HIGH : LOW;
+      digitalWrite(pins[i].pin, pins[i].level);
+    }
+  }
+}
+</code></pre></div>
+	<p>
+	</div>
+	</p>
+	<p>
+	<div style="float: right; width: 45%; height:400px; overflow: scroll; zoom: 50%;">
+	</p>
+<div ><pre><code> 
+Blink MACHINE pin {
+  OPTION wait_time 500;
+  on WHEN SELF IS off;
+  off DEFAULT;
+  ENTER on { 
+	SET pin TO on;
+	WAIT wait_time;
+  }
+  ENTER off { 
+	SET pin TO off;
+	WAIT wait_time;
+  }
+}
+cpu ESP32;
+pin1 OUTPUT cpu, cpu.GPIO22; 
+pin2 OUTPUT cpu, cpu.GPIO23; 
+pin3 OUTPUT cpu, cpu.GPIO24; 
+blinker1 Blink(wait_time: 500) pin1;
+blinker2 Blink(wait_time: 350) pin2;
+blinker3 Blink(wait_time: 650) pin3;
+</code></pre></div>
+	<p>
+	</div>
+	</p>
+	<p>
+	<div style="clear:both"></div>
+	</p>
+<br/>
+	<p>
+	Not a big change in the requirements
+	</p>
+	<p>
+	Quite a lot of code changes in C
+	</p>
+<br/>
+	<aside class="notes">
+		 Our objective with Clockwork is to make
+		 it as simple to program by building
+		 reusable models with code.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>A nicer version </h2>
+	<p>
+	We rarely use the WAIT statement
+	</p>
+<div ><pre><code> 
+Blink MACHINE pin {
+  OPTION wait_time 500;
+  on WHEN SELF IS off AND TIMER >= wait_time;
+  on WHEN SELF IS on AND TIMER <= wait_time;
+  off DEFAULT;
+  ENTER on  { SET pin TO on;  }
+  ENTER off { SET pin TO off; }
+}
+</code></pre></div>
+	<p>
+	Rules can be split so they can be expressed naturally
+	</p>
+	<p>
+	<q>If you've been off for 500ms or more, turn on</q>
+	</p>
+	<p>
+	<q>If you're on stay that way for 500ms</q> 
+	</p>
+	<p>
+	We like to keep the ENTER functions small
+	</p>
+<br/>
+	<aside class="notes">
+		 This version has two different reasons
+		 for the LED to be on:
+<br/>
+		 it might be off and have been that way for plenty of time
+		 it might be on already but hasn't been on for very long so it stays on
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Tools</h2>
+	<p>
+	iod - main EtherCAT control daemon
+	</p>
+	<p>
+	cw - local interpreter daemon
+	</p>
+	<p>
+	iosh - terminal shell
+	</p>
+	<p>
+	sampler - monitoring and logging
+	</p>
+	<p>
+	persistd - monitor and retain persistend state
+	</p>
+	<p>
+	modbusd - bridge to modbus masters (panels)
+	</p>
+	<p>
+	device connector - bridge to TCP/IP or serial devices
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Tools</h2>
+	<p>
+	iosh
+	</p>
+<div  overflow:auto; height:100%; font-size:0.6em;><pre><code> 
+> DESCRIBE O24V_GrabControlFan ;
+---------------
+O24V_GrabControlFan: off  Class: POINT 
+ instantiated at: /opt/latproc/code/config/config.lpc line:94
+  parameter 1 module (EL2828_01), state: OP
+  parameter 2 1 ()
+
+ io: readtime: 185932 [Channel 2 Output, 1 0:1.1]=0 (0)
+Exports:
+  O24V_GrabControlFan
+  published (1)
+Listening to: 
+  EL2828_01[123]:   OP
+
+Dependant machines: 
+  L_Inputs[399]:   nonempty
+  M_ControlFan[580]:   off
+
+properties:
+  NAME:O24V_GrabControlFan, STATE:off, export:0, tab:Outputs, type:Output, wire:Y52
+
+Timer: 20713486
+
+>
+</code></pre></div>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Tools</h2>
+	<p>
+	sampler
+	</p>
+<div ><pre><code> 
+443391 M_CO2 idle
+443891 M_CO2 update
+443892 XA_CO2 CO2_Level 496
+443892 XA_CO2 message 496
+443892 M_CO2 idle
+</code></pre></div>
+	<aside class="notes">
+		 sampler captures a stream of state and property changes
+		 extermally effective debug tool
+		 save sampler output and use grep etc
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>User Interface Tools </h2>
+	<p>
+	Web UI - basic web application for monitoring and control
+	</p>
+	<p>
+	humid - GUI development tool
+	</p>
+	<ul>
+	<li>		Buttons (toggle, momentary)</li>
+	
+	<li>		Text and Number Entry Fields</li>
+	
+	<li>		Page switching</li>
+	
+	<li>		Element visablity control</li>
+	
+	<li>		Time series graphing</li>
+	
+	</ul>
+	<p>
+	web 3D visualisation - render a model in 3D
+	</p>
+	<p>
+	scope - character based graphing for sampler 
+	</p>
+<br/>
+	<aside class="notes">
+		 The original user interface we a basic web page that 
+		 displayed the status of the IO on separate tabs, 
+		 for example a tab for Inputs and one for Outputs
+		 Each Clockwork machine can have a parameter that
+		 indicates where it's status should be displayed.
+<br/>
+		 Lately we have been using a new tool, Humid, that
+		 provides standard user interface tools and
+		 also includes features for real-time graphing
+		 of time-series data and can display images
+		 from web cameras or other sites.
+<br/>
+		 We have demonstrated how to render and control
+		 3D models of the machinery but this is not
+		 something we do for normal user interfaces
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Embedding clockwork</h2>
+	<p>
+	Automatically translate user code to C
+	</p>
+	<p>
+	Provides a runtime framework
+	</p>
+	<p>
+	Limited set of features currently built
+	</p>
+	<p>
+	Intending to support Arduino (AVR ATmega) devices
+	</p>
+	<p>
+	Intending to support other low power devices
+	</p>
+	<p>
+	Working on better integration with our Linux based toolset
+	</p>
+<br/>
+<br/>
+	<aside class="notes">
+		 We have had a fair bit of success embedding 
+		 clockwork code into a small device.
+<br/>
+		 This is still a work in progress so we 
+		 have features for basic applications but
+		 we are activelty trying to complete 
+		 the feature set.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Embedded feature set</h2>
+	<p>
+	Basic runtime working
+	</p>
+	<p>
+	No string processing
+	</p>
+	<p>
+	No floating point calculations
+	</p>
+	<p>
+	No iosh, debug is via mosquitto_pub/sub
+	</p>
+	<p>
+	Humid not yet supported
+	</p>
+<br/>
+	<aside class="notes">
+		 The embedded code currently can't do floating point
+		 calculations or pattern matching with strings
+<br/>
+		 We have only basic debugging and event logging via MQTT
+<br/>
+		 Our humid graphical editor does not currently talk to MQTT
+<br/>
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Build process</h2>
+	<p>
+	<div style="float: left; width: 30%; height:500px; overflow: scroll;">
+	</p>
+	<p>
+	Command based
+	</p>
+	<p>
+	Work from clockwork source directory
+	</p>
+<div ><pre><code> 
+
+cd my-project
+build_esp32 [-f]
+
+</code></pre></div>
+	<p>
+	</div>
+	</p>
+	<p>
+	<div style="float:right; position:absolute; top:0px; right:0px;">
+	</p>
+	<p>
+	<img height=500px; src="img/esp32-parts.png" />
+	</p>
+	<p>
+	</div>
+	</p>
+<br/>
+	<aside class="notes">
+		 The build process takes a bit to install initially
+		 but is not too bad once setup.
+<br/>
+		 The diagram shows how various code components are 
+		 pulled together to produce the final image.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Open Source components</h2>
+	<p>
+	Linux, GNU compiler suite
+	</p>
+	<p>
+	cJSON, libmodbus, ZeroMQ
+	</p>
+	<p>
+	EtherLAB, libXML, three.js
+	</p>
+	<p>
+	nanogui, glfw
+	</p>
+	<p>
+	etc.,
+	</p>
+<br/>
+	<aside class="notes">
+		 these are some of the Open Source tools we use within the latproc tool set
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Bugs and Issues</h2>
+	<p>
+	Not enough documentation
+	</p>
+	<p>
+	Numerous small issues 
+	</p>
+	<p>
+	Inter-clockwork channels needs more work
+	</p>
+	<ul>
+	<li>		Shadowing machines</li>
+	
+	<li>		Startup issues when components restart</li>
+	
+	</ul>
+	<p>
+	Some language features need clarification
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Application to FPGAs</h2>
+	<p>
+	Can do some high-level digital simulation
+	</p>
+	<p>
+	One day we would like to program FPGAs
+	</p>
+	<p>
+	An example: 4-bit counter:
+	</p>
+	<p>
+	<div style="float:right;" width:45%><img width=400px; src="img/binary_counter_2.png"></img></div>
+	</p>
+<div  float:left; width:45%; font-size:0.3em;><pre><code> 
+Pulser MACHINE {
+	OPTION delay 1000;
+	on WHEN TIMER > delay;
+	off DEFAULT;
+}
+TFF MACHINE in {
+	on STATE; off INITIAL;
+	RECEIVE in.off_enter { SEND next TO SELF; }
+	TRANSITION on TO off ON next;
+	TRANSITION off TO on ON next;
+}
+pulse Pulse;
+one TFF pulse;
+two TFF one;
+three TFF two;
+four TFF three;
+</code></pre></div>
+	<p>
+	<div style="clear:both"></div>
+	</p>
+<br/>
+	<aside class="notes">
+		 A Flip Flip is a device that holds itself in on state or another
+<br/>
+		 A TFF flips state when it gets a pulse from an Inputs
+<br/>
+		In this example we are passing the clock pulse into the first TFF
+<br/>
+		 We pass the output of the first TFF into the second and so on
+<br/>
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Monitoring with Sampler</h2>
+	<p>
+	Using the 4-bit counter example
+	</p>
+	<p>
+	sampling to watch the flip flop changes
+	</p>
+	<p>
+	<div style="float:right;" width:40%><img width=400px; src="img/binary_truth.png"></img></div>
+	</p>
+<div  float:left; width:40%; font-size:0.2em;><pre><code> 
+11150	one	off
+11152	two	off
+11156	three	off
+11160	four	off
+11174	monitor.VALUE	value	0
+12159	one	on
+12188	monitor.VALUE	value	1
+13166	one	off
+13169	two	on
+13192	monitor.VALUE	value	2
+14172	one	on
+14198	monitor.VALUE	value	3
+15178	one	off
+15181	two	off
+15185	three	on
+15207	monitor.VALUE	value	4
+16190	one	on
+</code></pre></div>
+<br/>
+	<aside class="notes">
+		 Here is an example of monitoring with sampler
+<br/>
+		 In this case we have used a filter to only show our flip flops and the result
+<br/>
+		 Every state or property change appears in the log
+<br/>
+		 the table on the right shows how the binary state of the flip flops 
+		 translates to a numeric value.
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Convert 4-bits to a number</h2>
+	<p>
+	Machines can be placed in a List
+	</p>
+	<p>
+	A List can interpret the on-off state of its members to create a BITSET
+	</p>
+	<p>
+	A BITSET can be interpreted as a number
+	</p>
+	<p>
+	BITSETS can be saved and loaded and used to initialise members of list to a known state.
+	</p>
+<div ><pre><code> 
+res LIST four, three, two, one;
+Monitor MACHINE list {
+  OPTION VALUE 0;
+  update WHEN VALUE != BITSET FROM list;
+  idle DEFAULT;
+  ENTER update { WAIT 20; VALUE := BITSET FROM list; }
+}
+monitor Monitor res;
+</code></pre></div>
+	<aside class="notes">
+		 The 'monitor' in the previous example is a clockwork machine
+		 that takes a list of inputs and uses BITSET to interpret the states as a value
+</aside>
+	<ul>
+	<li>	</li>
+	
+	<aside class="notes">
+		 the WAIT statement give time for the rippling of state changes to
+		 stabilise before outputing the value.
+<br/>
+	</ul>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Future</h2>
+	<p>
+	We are continuing to develop and refine the language
+	</p>
+	<p>
+	Tools are developed as we need them
+	</p>
+	<p>
+	Will use the compiler technology on Linux
+	</p>
+	<p>
+	Lots of other ideas on the drawing board
+	</p>
+	<p>
+	We would like to help others use the tool set
+	</p>
+<br/>
+	<aside class="notes">
+		 Our tool set has been getting gradually more 
+		 powerful and as we use clockwork
+		 we find new areas that it seems to be applicable
+<br/>
+		 So far we haven't been able to build a community
+		 and so our development rate is pretty slow
+<br/>
+		 The best way to improve the tools is to
+		 use them and we are keen to help
+<br/>
+	</aside>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Questions or comments</h2>
+	<p>
+	clockwork - language and main toolset
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/clockwork<br/>
+	</p>
+	<p>
+	scope - an event sampler and terminal oscilloscope
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/scope<br/>
+	</p>
+	<p>
+	humid - Human Interface Daemon
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/humid<br/>
+	</p>
+	<p>
+	clockwork_esp32 - ESP32/FreeRTOS runtime
+	</p>
+	<p>
+	&nbsp;&nbsp;https://github.com/latproc/clockwork_esp32
+	</p>
+<br/>
+</section>
+<section class="lca-slide"  data-state="normal-slide" >
+	<h2>Questions or comments</h2>
+	<p>
+	Latproc - Language and Tools for Process Control
+	</p>
+	<ul>
+	<li>		https://github.com/latproc</li>
+	
+<br/>
+	</ul>
+	<p>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/KOCRodkhn7E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</p>
+<br/>
+</section>
+</div>
+		<!-- ... and here -->
+		
+	</div> <!-- class="reveal" -->
+	<!-- End of main presentation -->
+
+	<!-- Start of configuration section -->
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		var presenter = !!Reveal.getQueryHash().s;
+
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: presenter ? false : true,
+			progress: true,
+			history: true,
+			center: false,
+			controlsTutorial: presenter ? false : true,
+
+			slideNumber: presenter ? null : 'c/t',
+
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions. Can be
+			// specified using percentage units.
+			width: 1050,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.1,
+
+			multiplex: {
+				url: 'https://p.xobs.io/',
+				id: '631bb3db6fbaea78',
+				secret: Reveal.getQueryHash().s || null
+			},
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.02,
+			maxScale: 5.5,
+
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/search/search.js', async: true },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/notes/notes.js', async: true },
+
+				{ src: 'lib/js/socket.io.js', async: true },
+				{
+					src: presenter ?
+						'plugin/multiplex/master.js' :
+						'plugin/multiplex/client.js', async: true
+				},
+			]
+		});
+		Reveal.addEventListener( 'title-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-white");
+			footer.classList.add("footer-green");
+			document.body.style.background = "#387A3B"
+		} );
+		Reveal.addEventListener( 'normal-slide', function() {
+			var footer = document.getElementById("lca-footer");
+			footer.classList.remove("footer-green");
+			footer.classList.add("footer-white");
+			document.body.style.background = "#fff"
+		} );
+
+	</script>
+</body>
+
+</html>

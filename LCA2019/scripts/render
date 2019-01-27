@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-if [ "$1" = "--wiz" ]; then
+if [ "$1" = "--help" ]; then
  cat <<EOW
 -f listfile  name of a file containing the slides to be presented
 -o output  name of the output html file

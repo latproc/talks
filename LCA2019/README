@@ -1,0 +1,19 @@
+These are the presentations for LCA2019 (linux.conf.au) 
+
+The slides use the reveal.js presentation toolkit
+
+The slide source is in 'slides' and there are some tools in scripts/ that
+generate the html files in the presentations directory. The scripts/render
+program tries hard to render a talk from a list of slides.
+
+To view the presentation html files copy them to the server directory 
+above or (better) create a symbolic link there:
+
+  cd ../server
+  ln -sf ../presentations/mtme.html index.html
+
+if you run a server (npm start) in the server directory you 
+will be able to see speaker notes. 
+
+There are pdf versions of the presentations also in the 
+presentations/ directory..

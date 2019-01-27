@@ -97,10 +97,7 @@
 	<p>
 	A look at the code
 	</p>
-	<p>
-	Mike O'Connor
-	</p>
-
+<br/>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Language Features</h2>
@@ -116,7 +113,7 @@
 	<p>
 	Highly reusable code
 	</p>
-
+<br/>
 	<aside class="notes">
 		 There are a few key features that distinguish our 
 		 clockwork language. It uses rules to automatically
@@ -125,19 +122,19 @@
 		 It is highly parallel and since clockwork components
 		 run continuously there is no need for loops
 <br/>
-		 We fund that the components we build tend to be 
+		 We find that the components we build tend to be 
 		 easy to reuse.
 <br/>
 	</aside>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Defining states</h2>
-<pre><code>
-Light MACHINE {
-	on STATE;
-	off INITIAL;
-}
-</code></pre>
+<div ><pre><code> 
+	Light MACHINE {
+		on STATE;
+		off INITIAL;
+	}
+</code></pre></div>
 	<p>
 	Simple machine
 	</p>
@@ -147,33 +144,33 @@ Light MACHINE {
 	<p>
 	Controlled externally
 	</p>
-
+<br/>
 	<aside class="notes">
-		 this describes a machine that can be on or off, initially it is 
-		 off. This machine does not have any automation, it has to be
+		 this describes a machine that can be on or off, initially it is off
+		 This machine does not have any automation, it has to be
 		 controlled externally by directly setting its state.
 <br/>
 	</aside>
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Using transitions</h2>
+<br/>
+<div ><pre><code> 
+	ToggleSwitch MACHINE {
+		on STATE;
+		off INITIAL;
 
-<pre><code>
-ToggleSwitch MACHINE {
-	on STATE;
-	off INITIAL;
-
-	TRANSITION on TO off USING next;
-	TRANSITION off TO on USING next;
-}
-</code></pre>
+		TRANSITION on TO off USING next;
+		TRANSITION off TO on USING next;
+	}
+</code></pre></div>
 	<p>
 	Basic automation via transitions
 	</p>
 	<p>
 	Flips state when 'next' message is received
 	</p>
-
+<br/>
 	<aside class="notes">
 		 this dscribes a machine that can receive a message called: 'next'
 <br/>
@@ -196,7 +193,7 @@ ToggleSwitch MACHINE {
 	<p>
 	Nothing special so far...
 	</p>
-
+<br/>
 	<aside class="notes">
 		 this is all very common and is what all state-based programming
 		 is like. Essentially, transitions are used to respond to 
@@ -210,13 +207,13 @@ ToggleSwitch MACHINE {
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Using rules</h2>
-
-<pre><code>
-Blinker MACHINE {
-	on WHEN SELF IS off;
-	off DEFAULT;
-}
-</code></pre>
+<br/>
+<div ><pre><code> 
+	Blinker MACHINE {
+		on WHEN SELF IS off;
+		off DEFAULT;
+	}
+</code></pre></div>
 	<p>
 	Automatic state selection
 	</p>
@@ -226,7 +223,7 @@ Blinker MACHINE {
 	<p>
 	Stops at the first rule that is true
 	</p>
-
+<br/>
 	<aside class="notes">
 		 here is a machine that has two states, 'on' and 'off'
 <br/>
@@ -248,20 +245,20 @@ Blinker MACHINE {
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Controlling things</h2>
+<br/>
+<div ><pre><code> 
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
 
-<pre><code>
-LightSwitch MACHINE switch, light {
-	on WHEN switch IS on;
-	off DEFAULT;
-
-	ENTER on  { SET light TO on; }
-	ENTER off { SET light TO off; }
-}
-</code></pre>
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+</code></pre></div>
 	<p>
 	Controls 'light' based on the state of 'switch'
 	</p>
-
+<br/>
 	<aside class="notes">
 		 When a machine changes state, it check to see if it has to do anything
 		 by looking for an ENTER statement for the new state. 
@@ -279,17 +276,17 @@ LightSwitch MACHINE switch, light {
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>No Loops or Ifs?</h2>
+<br/>
+<div ><pre><code> 
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN count < 10;
+		idle DEFAULT;
 
-<pre><code>
-Counter MACHINE {
-	OPTION count 0;
-	up WHEN count < 10;
-	idle DEFAULT;
-
-	ENTER up { count := count + 1; }
-}
-</code></pre>
-
+		ENTER up { count := count + 1; }
+	}
+</code></pre></div>
+<br/>
 	<aside class="notes">
 		 There is no while statement, for statement or repeat statement in clockwork
 		 everything is accomplished with state changes.
@@ -313,24 +310,24 @@ Counter MACHINE {
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>No If statements?</h2>
+<br/>
+<div ><pre><code> 
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN count < 10;
+		idle DEFAULT;
 
-<pre><code>
-Counter MACHINE {
-	OPTION count 0;
-	up WHEN count < 10;
-	idle DEFAULT;
-
-	ENTER up { 
-		count := count + 1;
-		IF count < 10 { SET SELF TO idle; }
+		ENTER up { 
+			count := count + 1;
+			IF count < 10 { SET SELF TO idle; }
+		}
 	}
-}
-</code></pre>
-
+</code></pre></div>
+<br/>
 	<p>
 	An ugly fix to the error in the rules
 	</p>
-
+<br/>
 	<aside class="notes">
 		 actually, clockwork has if statements but we almost never use them
 <br/>
@@ -343,17 +340,17 @@ Counter MACHINE {
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Counting up</h2>
+<br/>
+<div ><pre><code> 
+	Counter MACHINE {
+		OPTION count 0;
+		up WHEN SELF IS idle AND count < 10;
+		idle DEFAULT;
 
-<pre><code>
-Counter MACHINE {
-	OPTION count 0;
-	up WHEN SELF IS idle AND count < 10;
-	idle DEFAULT;
-
-	ENTER up { count := count + 1; }
-}
-</code></pre>
-
+		ENTER up { count := count + 1; }
+	}
+</code></pre></div>
+<br/>
 	<aside class="notes">
 		 this example fixes the bug in the previous example.
 <br/>
@@ -363,17 +360,17 @@ Counter MACHINE {
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Reusing components</h2>
+<br/>
+<div ><pre><code> 
+	LightSwitch MACHINE switch, light {
+		on WHEN switch IS on;
+		off DEFAULT;
 
-<pre><code>
-LightSwitch MACHINE switch, light {
-	on WHEN switch IS on;
-	off DEFAULT;
-
-	ENTER on  { SET light TO on; }
-	ENTER off { SET light TO off; }
-}
-</code></pre>
-
+		ENTER on  { SET light TO on; }
+		ENTER off { SET light TO off; }
+	}
+</code></pre></div>
+<br/>
 	<aside class="notes">
 		 When machine are linked together, it is important to make
 		 sure that they have the states and properties that are used in 
@@ -394,19 +391,19 @@ LightSwitch MACHINE switch, light {
 </section>
 <section class="lca-slide"  data-state="normal-slide" >
 	<h2>Controlling multiple things at once</h2>
+<br/>
+<div ><pre><code> 
+	LightController MACHINE lights {
+		COMMAND on  { SEND turnOn TO lights; }
+		COMMAND off { SEND turnOff TO lights; }
+	}
+	front_porch Light;
+	garden Light;
+	yard_lights LIST front_porch, garden;
 
-<pre><code>
-LightController MACHINE lights {
-	COMMAND on  { SEND turnOn TO lights; }
-	COMMAND off { SEND turnOff TO lights; }
-}
-front_porch Light;
-garden Light;
-yard_lights LIST front_porch, garden;
-
-controller LightController yard_lights;
-</code></pre>
-
+	controller LightController yard_lights;
+</code></pre></div>
+<br/>
 	<aside class="notes">
 		 this example shows how some lights can be built into a list and
 		 that list can be connected to a controller machine
@@ -432,7 +429,7 @@ controller LightController yard_lights;
 			controls: presenter ? false : true,
 			progress: true,
 			history: true,
-			center: true,
+			center: false,
 			controlsTutorial: presenter ? false : true,
 
 			slideNumber: presenter ? null : 'c/t',
@@ -440,7 +437,7 @@ controller LightController yard_lights;
 			// The "normal" size of the presentation, aspect ratio will be preserved
 			// when the presentation is scaled to fit different resolutions. Can be
 			// specified using percentage units.
-			width: 960,
+			width: 1050,
 			height: 700,
 
 			// Factor of the display size that should remain empty around the content

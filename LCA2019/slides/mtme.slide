@@ -466,7 +466,7 @@ blinker Blink led;
 	-- normal programming is.
 
 Add more LEDS
-	<div style="float: left; width: 500px; height:400px; overflow: scroll; zoom: 50%">
+	<div style="float: left; width: 45%; height:400px; overflow: scroll; zoom: 50%">
 	###
 typedef struct {
   int pin;
@@ -504,7 +504,7 @@ void loop() {
 }
 	###
 	</div>
-	<div style="float: right; width: 500px; height:400px; overflow: scroll; zoom: 50%;">
+	<div style="float: right; width: 45%; height:400px; overflow: scroll; zoom: 50%;">
 	###
 Blink MACHINE pin {
   OPTION wait_time 500;
@@ -528,10 +528,12 @@ blinker2 Blink(wait_time: 350) pin2;
 blinker3 Blink(wait_time: 650) pin3;
 	###
 	</div>
+	<div style="clear:both"></div>
 
 	Not a big change in the requirements
 	Quite a lot of code changes in C
-	<div style="clear:both"></div>
+
+	-- note: alt-click either code block to zoom in on it
 
 	-- Our objective with Clockwork is to make
 	-- it as simple to program by building
